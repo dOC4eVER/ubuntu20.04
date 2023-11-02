@@ -766,5 +766,5 @@ echo "
     tput setaf 5 ; tput bold ;echo " │ EMAIL   : $EMAIL"; tput sgr0;
     tput setaf 6 ; tput bold ;echo " │ MYSQL root PASS: $PASSMYSQL"; tput sgr0;
     tput setaf 7 ; tput bold ;echo " │ MYSQL user_iptvpro PASS: $XPASS"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " └────────────────────────────────────────────────────────────────────┘"; tput sgr0;│
+    tput setaf 2 ; tput bold ;echo " └────────────────────────────────────────────────────────────────────┘"; tput sgr0;
 " >> /root/Xtreaminfo.txt
