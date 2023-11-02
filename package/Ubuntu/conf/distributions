@@ -1,0 +1,27 @@
+Origin: local
+Label: local
+Suite: bionic
+Codename: bionic
+Version: 18.04
+Architectures: amd64
+Components: main
+Description: local repo for php build
+Update: - ubuntu
+
+Suite: focal
+Codename: focal
+Version: 20.04
+Architectures: amd64
+Components: main
+Description: local repo for php build
+Update: - ubuntu
+
+Origin: local
+Label: local
+Suite: jammy
+Codename: jammy
+Version: 22.04
+Architectures: amd64
+Components: main
+Description: local repo for php build
+Update: - ubuntu

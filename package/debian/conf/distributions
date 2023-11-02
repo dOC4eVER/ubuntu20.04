@@ -1,0 +1,19 @@
+Origin: local
+Label: local
+Suite: buster
+Codename: buster
+Version: 10
+Architectures: amd64
+Components: main
+Description: local repo for php build
+Update: - debian
+
+Origin: local
+Label: local
+Suite: bullseye
+Codename: bullseye
+Version: 11
+Architectures: amd64
+Components: main
+Description: local repo for php build
+Update: - debian

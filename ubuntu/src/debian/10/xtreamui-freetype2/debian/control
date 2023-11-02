@@ -1,0 +1,15 @@
+Source: xtreamui-freetype2
+Section: php
+Priority: optional
+Maintainer: root <amidevous@gmail.com>
+Build-Depends: debhelper, autotools-dev, libc6-dev | libc-dev, zlib1g-dev | libz-dev, libpng-dev
+Standards-Version: 4.4.1
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Browser: https://salsa.debian.org/debian/freetype
+#Vcs-Git: https://salsa.debian.org/debian/freetype.git
+
+Package: xtreamui-freetype2
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: xtreamui-freetype2
+ xtreamui-freetype2

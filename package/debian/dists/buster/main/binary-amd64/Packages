@@ -1,0 +1,17 @@
+Package: xtreamui-freetype2
+Version: 2.12.1-2.debian-buster
+Architecture: amd64
+Maintainer: root <amidevous@gmail.com>
+Installed-Size: 2665
+Depends: libc6 (>= 2.14), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Homepage: <insert the upstream URL, if relevant>
+Priority: optional
+Section: php
+Filename: pool/main/x/xtreamui-freetype2/xtreamui-freetype2_2.12.1-2.debian-buster_amd64.deb
+Size: 1024022
+SHA256: 8dc7a31915239d563630f3c41cd6885de6bd28fbe1206d5d3307a72bee3685a4
+SHA1: bbe30767e276be2a01c08fb15054a24dc558f353
+MD5sum: 2fb051d8ae00f65b13a1e5d7e8d53ab3
+Description: xtreamui-freetype2
+ xtreamui-freetype2
+

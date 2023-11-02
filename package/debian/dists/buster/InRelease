@@ -1,0 +1,21 @@
+Origin: local
+Label: local
+Suite: buster
+Codename: buster
+Version: 10
+Date: Mon, 23 Jan 2023 12:36:48 UTC
+Architectures: amd64
+Components: main
+Description: local repo for php build
+MD5Sum:
+ 319c83ac2a884d4bf26a2a9df4fe4a8b 614 main/binary-amd64/Packages
+ 3095281e182b2086bcd46fdd3844dbb0 411 main/binary-amd64/Packages.gz
+ 7a894c29ee6b03ed59964bc408339911 129 main/binary-amd64/Release
+SHA1:
+ fb665472fa2902d64a523993b83529686cb92c48 614 main/binary-amd64/Packages
+ 8f4d68e6fcd1dadd4361ea44d23c30aa4fcf6204 411 main/binary-amd64/Packages.gz
+ d4507803083d50fc5f84a7a054ddf6eeed3961bd 129 main/binary-amd64/Release
+SHA256:
+ 151eeb47f377f85ea46ec68ca015a7b83160d738c62c03b6c8e6cfb637fd3d63 614 main/binary-amd64/Packages
+ 192a63645a2f38454b7fdb91b9f3815e60cb009cf780bd00b5b9126e8b2cc4f0 411 main/binary-amd64/Packages.gz
+ 96afa25ee39eed571f652797929e1ea10778eaceb016523be30e0a358e6d1dee 129 main/binary-amd64/Release

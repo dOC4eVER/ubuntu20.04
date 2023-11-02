@@ -1,0 +1,12 @@
+#!/bin/bash
+rm -rf /root/ubuntu20.04
+git clone git@github.com:amidevous/ubuntu20.04.git /root/ubuntu20.04
+NAMERPM=$(rpm -pq --queryformat "%{NAME}" $1)
+MINRPM=${NAMERPM::1}
+mkdir -p /root/ubuntu20.04/package/CentOS-Stream/8/x86_64/Packages/$MINRPM
+mv $1 /root/ubuntu20.04/package/CentOS-Stream/8/x86_64/Packages/$MINRPM
+createrepo --update /root/ubuntu20.04/package/CentOS-Stream/8/x86_64
+cd /root/ubuntu20.04/
+git add *
+git commit -m "add CentOS-Stream 8 packages"
+git push -u origin master

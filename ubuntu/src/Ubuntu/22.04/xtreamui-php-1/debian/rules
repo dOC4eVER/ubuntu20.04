@@ -1,0 +1,105 @@
+#!/usr/bin/make -f
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+# Hardcode correct absolute path to sed
+export ac_cv_path_SED = $(shell command -v sed)
+SANE_ARCHS := amd64 i386 arm64
+PARALLEL=--parallel
+# Enable this for debugging the sed scripts
+export SED := /bin/sed
+# Make the shell scripts fail after first failed command (important for SAPI loops)
+SHELL := /bin/sh -e
+# enable dpkg build flags
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+export DEB_HOST_MULTIARCH
+LIBTOOL_VERSION := $(shell dpkg-query -f'$${Version}' -W libtool)
+# Disable the test now
+DEB_BUILD_OPTIONS=nocheck
+QUILT_DIFF_OPTS := -p
+QUILT_NO_DIFF_TIMESTAMPS := 1
+export QUILT_DIFF_OPTS QUILT_NO_DIFF_TIMESTAMPS
+export PROG_SENDMAIL := /usr/sbin/sendmail
+ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+  DEB_CFLAGS_MAINT_APPEND += -O2
+else
+  DEB_CFLAGS_MAINT_APPEND += -O0
+endif
+DEB_CFLAGS_MAINT_APPEND += -Wall -pedantic -fsigned-char -fno-strict-aliasing 
+DEB_CFLAGS_MAINT_APPEND += $(shell getconf LFS_CFLAGS)
+
+# OpenSSL 3.0 support
+DEB_CFLAGS_MAINT_APPEND += -DOPENSSL_SUPPRESS_DEPRECATED
+
+# Enable IEEE-conformant floating point math on alphas (not the default)
+ifeq (alpha-linux-gnu,$(DEB_HOST_GNU_TYPE))
+  DEB_CFLAGS_MAINT_APPEND += -mieee
+endif
+
+# Enable producing of debugging information
+DEB_CFLAGS_MAINT_APPEND += -g
+
+DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+export DEB_CFLAGS_MAINT_APPEND
+export DEB_LDFLAGS_MAINT_APPEND
+
+
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+%:
+	dh $@ --with systemd --with apache2 --without=build-stamp --without autoreconf	$(PARALLEL)
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--build=$(DEB_BUILD_GNU_TYPE) \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=/home/xtreamcodes/iptv_xtream_codes/php \
+		--with-libdir=/lib/x86_64-linux-gnu \
+		--with-zlib-dir \
+		--enable-static \
+		--disable-shared \
+		--with-freetype-dir=/home/xtreamcodes/iptv_xtream_codes/freetype2 \
+		--enable-mbstring \
+		--enable-calendar \
+		--with-curl \
+		--with-gd \
+		--disable-rpath \
+		--enable-inline-optimization \
+		--with-bz2 \
+		--with-zlib \
+		--enable-sockets \
+		--enable-sysvsem \
+		--enable-sysvshm \
+		--enable-pcntl \
+		--enable-mbregex \
+		--enable-exif \
+		--enable-bcmath \
+		--with-mhash \
+		--enable-zip \
+		--with-pcre-regex \
+		--with-pdo-mysql=mysqlnd \
+		--with-mysqli=mysqlnd \
+		--with-openssl \
+		--with-fpm-user=xtreamcodes \
+		--with-fpm-group=xtreamcodes \
+		--with-gettext \
+		--with-xmlrpc \
+		--with-xsl \
+		--enable-opcache \
+		--enable-fpm \
+		--enable-libxml \
+		--with-jpeg-dir \
+		--enable-gd-jis-conv \
+		--with-webp-dir \
+		--with-xpm-dir

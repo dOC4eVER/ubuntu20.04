@@ -1,0 +1,21 @@
+Origin: local
+Label: local
+Suite: jammy
+Codename: jammy
+Version: 22.04
+Date: Sun, 22 Jan 2023 22:33:43 UTC
+Architectures: amd64
+Components: main
+Description: local repo for php build
+MD5Sum:
+ 428bf099c27a40e26e777470f83f1cc1 615 main/binary-amd64/Packages
+ aa2851e04050f55fd83a10352dd3a215 418 main/binary-amd64/Packages.gz
+ 88a2ebc7a3fbee76ed79751cafbf8aea 131 main/binary-amd64/Release
+SHA1:
+ 3df750f2f3c5e8b3e306c4b3e4ba5201745f1b7b 615 main/binary-amd64/Packages
+ 14fea921873d26094693099512725d6a07f24bf3 418 main/binary-amd64/Packages.gz
+ 6926a10dcfc5ad9bc99eff547e98b1b6c7d97034 131 main/binary-amd64/Release
+SHA256:
+ e1ea8b9e22564189994f997f0a9d500d7446981b07264c3108e4b39af759cea9 615 main/binary-amd64/Packages
+ 8888c94ea0ddd47c34103a88a790ae138713c2cd02ebbc9979a2daf628004623 418 main/binary-amd64/Packages.gz
+ feb5a3fe91c8361e69642eee02ed322f5e69090098289ee3c440715c546f8666 131 main/binary-amd64/Release

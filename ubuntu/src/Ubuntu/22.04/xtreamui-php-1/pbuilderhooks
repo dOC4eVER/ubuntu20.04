@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "deb http://fr.archive.ubuntu.com/ubuntu jammy main restricted universe multiverse" > /etc/apt/sources.list
+echo "deb-src http://fr.archive.ubuntu.com/ubuntu jammy main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb http://fr.archive.ubuntu.com/ubuntu jammy-security main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb-src http://fr.archive.ubuntu.com/ubuntu jammy-security main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb http://fr.archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb-src http://fr.archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb [trusted=yes] https://github.com/amidevous/xtream-ui-ubuntu20.04/raw/master/package/Ubuntu jammy main" >> /etc/apt/sources.list
+apt-get update
+apt-get -y dist-upgrade
+apt-get -y  install xtreamui-freetype2
+cd /root
+wget -O /root/xtreamui-php_7.4.33-1.Ubuntu.orig.tar.xz https://www.php.net/distributions/php-7.4.33.tar.xz
+tar -xvf /root/xtreamui-php_7.4.33-1.Ubuntu.orig.tar.xz

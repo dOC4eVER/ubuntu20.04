@@ -1,0 +1,17 @@
+Package: xtreamui-freetype2
+Version: 2.12.1-2.Ubuntu-focal
+Architecture: amd64
+Maintainer: root <amidevous@gmail.com>
+Installed-Size: 2645
+Depends: libc6 (>= 2.14), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Homepage: <insert the upstream URL, if relevant>
+Priority: optional
+Section: php
+Filename: pool/main/x/xtreamui-freetype2/xtreamui-freetype2_2.12.1-2.Ubuntu-focal_amd64.deb
+Size: 989356
+SHA256: a31501a88b5d8219ad44c98c2142d9ebfe231b4589dfbe420b8b60bbc4b14953
+SHA1: 1ee2fde104139435dacd9922a54b13482d704ccf
+MD5sum: 28f0b8c7eb31b1e96e8c397fdc7b0240
+Description: xtreamui-freetype2
+ xtreamui-freetype2
+

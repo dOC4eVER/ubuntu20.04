@@ -1,0 +1,21 @@
+Origin: local
+Label: local
+Suite: bionic
+Codename: bionic
+Version: 18.04
+Date: Mon, 23 Jan 2023 12:33:59 UTC
+Architectures: amd64
+Components: main
+Description: local repo for php build
+MD5Sum:
+ 319c83ac2a884d4bf26a2a9df4fe4a8b 614 main/binary-amd64/Packages
+ 3095281e182b2086bcd46fdd3844dbb0 411 main/binary-amd64/Packages.gz
+ 9eca5d831fa9e919f9ebf7481b9f8b6a 132 main/binary-amd64/Release
+SHA1:
+ fb665472fa2902d64a523993b83529686cb92c48 614 main/binary-amd64/Packages
+ 8f4d68e6fcd1dadd4361ea44d23c30aa4fcf6204 411 main/binary-amd64/Packages.gz
+ 9c85a5a1d082b91384b8a90178ac7fa7619a169a 132 main/binary-amd64/Release
+SHA256:
+ 151eeb47f377f85ea46ec68ca015a7b83160d738c62c03b6c8e6cfb637fd3d63 614 main/binary-amd64/Packages
+ 192a63645a2f38454b7fdb91b9f3815e60cb009cf780bd00b5b9126e8b2cc4f0 411 main/binary-amd64/Packages.gz
+ 114b69305b2ba6d5311550f152ce9bb15b43a2cc25ac2f884bf1b88967bf33a0 132 main/binary-amd64/Release

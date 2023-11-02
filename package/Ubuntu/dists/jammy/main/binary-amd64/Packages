@@ -1,0 +1,17 @@
+Package: xtreamui-freetype2
+Version: 2.12.1-2.Ubuntu-jammy
+Architecture: amd64
+Maintainer: root <amidevous@gmail.com>
+Installed-Size: 2646
+Depends: libc6 (>= 2.33), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Homepage: <insert the upstream URL, if relevant>
+Priority: optional
+Section: unknown
+Filename: pool/main/x/xtreamui-freetype2/xtreamui-freetype2_2.12.1-2.Ubuntu-jammy_amd64.deb
+Size: 994628
+SHA256: d707140e5d343e10ac53e000f10fea5108b786610bc0737ceb38b2393746923c
+SHA1: 5ee79eec77aa353bc0073b06b7a1ed7cff60acc9
+MD5sum: 03f8113899fd36f1be80f24a74f7da29
+Description: xtreamui-freetype2
+ xtreamui-freetype2
+

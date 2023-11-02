@@ -1,0 +1,29 @@
+Format: 1.8
+Date: Sun, 22 Jan 2023 11:49:32 +0000
+Source: xtreamui-php
+Built-For-Profiles: noudeb
+Architecture: source
+Version: 7.4.33-1.Ubuntu-jammy
+Distribution: jammy
+Urgency: medium
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Changed-By: Devous Amy <amidevous@gmail.com>
+Changes:
+ xtreamui-php (7.4.33-1.Ubuntu-jammy) jammy; urgency=medium
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Checksums-Sha1:
+ ffa1c07107d8065a127d8c6d91570629a389a9ed 2703 xtreamui-php_7.4.33-1.Ubuntu-jammy.dsc
+ 4d3152b2339332b4eef2c12931931d4a1245fdab 10420144 xtreamui-php_7.4.33-1.Ubuntu.orig.tar.xz
+ 1e9d5f1aa920f94b14019499a0b68caa9902374d 4324 xtreamui-php_7.4.33-1.Ubuntu-jammy.debian.tar.xz
+ f1d64467582e65668ae46438011a40561950759c 14262 xtreamui-php_7.4.33-1.Ubuntu-jammy_source.buildinfo
+Checksums-Sha256:
+ 5f49b34fb7e8768d14f777e748a51e6acf035693d98f9b47c4290e836ceae4f3 2703 xtreamui-php_7.4.33-1.Ubuntu-jammy.dsc
+ 924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927 10420144 xtreamui-php_7.4.33-1.Ubuntu.orig.tar.xz
+ ddab1c87aec567d0fe2d60dd0da6c9af75660141978a2511c5a996599c5e9b16 4324 xtreamui-php_7.4.33-1.Ubuntu-jammy.debian.tar.xz
+ 5b55a6f503bfef79a293e5518fb1cd528820b3efa0d2f67a399cc8b84f94eef0 14262 xtreamui-php_7.4.33-1.Ubuntu-jammy_source.buildinfo
+Files:
+ dc83fd9412e263bb4f7619070789f129 2703 php optional xtreamui-php_7.4.33-1.Ubuntu-jammy.dsc
+ f098632163cd47f2c1ffe2bdc6ef1ff2 10420144 php optional xtreamui-php_7.4.33-1.Ubuntu.orig.tar.xz
+ 3ff29fadb7a1c361c911c3fed6fa1c31 4324 php optional xtreamui-php_7.4.33-1.Ubuntu-jammy.debian.tar.xz
+ c5dc2e87deca9aa648d44fb641458bbe 14262 php optional xtreamui-php_7.4.33-1.Ubuntu-jammy_source.buildinfo

@@ -1,0 +1,58 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+%:
+	dh $@ --with systemd --with apache2 --without=build-stamp --without autoreconf
+	
+prepared: prepared-stamp
+prepared-stamp:
+	./buildconf --force
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--prefix=/home/xtreamcodes/iptv_xtream_codes/php \
+		--with-zlib-dir \
+		--with-freetype-dir=/home/xtreamcodes/iptv_xtream_codes/freetype2 \
+		--enable-mbstring \
+		--enable-calendar \
+		--with-curl \
+		--with-gd \
+		--disable-rpath \
+		--enable-inline-optimization \
+		--with-bz2 \
+		--with-zlib \
+		--enable-sockets \
+		--enable-sysvsem \
+		--enable-sysvshm \
+		--enable-pcntl \
+		--enable-mbregex \
+		--enable-exif \
+		--enable-bcmath \
+		--with-mhash \
+		--enable-zip \
+		--with-pcre-regex \
+		--with-pdo-mysql=mysqlnd \
+		--with-mysqli=mysqlnd \
+		--with-openssl \
+		--with-fpm-user=xtreamcodes \
+		--with-fpm-group=xtreamcodes \
+		--with-libdir=/lib/x86_64-linux-gnu \
+		--with-gettext \
+		--with-xmlrpc \
+		--with-xsl \
+		--enable-opcache \
+		--enable-fpm \
+		--enable-libxml \
+		--enable-static \
+		--disable-shared \
+		--with-jpeg-dir \
+		--enable-gd-jis-conv \
+		--with-webp-dir \
+		--with-xpm-dir

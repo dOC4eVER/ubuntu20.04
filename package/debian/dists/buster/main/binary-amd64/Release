@@ -1,0 +1,7 @@
+Archive: buster
+Version: 10
+Component: main
+Origin: local
+Label: local
+Architecture: amd64
+Description: local repo for php build
