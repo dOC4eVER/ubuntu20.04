@@ -742,11 +742,11 @@ echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
-echo "
+echo
     tput setaf 0 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ─────────────────┐"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ USERNAME: $adminL"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ PASSWORD: $adminP"; tput sgr0;
-    tput setaf 4 ; tput bold ;echo " │ CLIENT ACCES PORT: $APACHEACCESPORT"; tput sgr0;
+    tput setaf 4 ; tput bold ;echo " │ CLIENT ACCES PORT: $CLIENTACCESPORT"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ APACHE ACCES PORT: $APACHEACCESPORT"; tput sgr0;
     tput setaf 5 ; tput bold ;echo " │ EMAIL   : $EMAIL"; tput sgr0;
     tput setaf 6 ; tput bold ;echo " │ MYSQL root PASS: $PASSMYSQL"; tput sgr0;
