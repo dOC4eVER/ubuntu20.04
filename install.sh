@@ -481,8 +481,7 @@ mysql()
 encrypt(rHost, rUsername, rPassword, rDatabase, rServerID, rPort)
 modifyNginx()
 END
-wget -qO install.sql https://github.com/dOC4eVER/ubuntu20.04/raw/master/
-update_reg_users.py
+wget -qO install.sql https://github.com/dOC4eVER/ubuntu20.04/raw/master/update_reg_users.py
 sed -i "s|adminL|$adminL|g" install.sql
 sed -i "s|Padmin|$Padmin|g" install.sql
 sed -i "s|EMAIL|$EMAIL|g" install.sql
