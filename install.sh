@@ -88,7 +88,7 @@ while getopts ":t:a:p:o:c:r:e:m:s:h:" option; do
 done
 
 #clear
-XC_VERSION="22 dOC4eVER v01"
+XC_VERSION="41 dOC4eVER v01"
 PANEL_PATH="/home/xtreamcodes/iptv_xtream_codes"
 #--- Display the 'welcome' splash/user warning info..
 #test ok
@@ -279,7 +279,8 @@ spinner()
 if [[ "$tz" == "" ]] ; then
     # Propose selection list for the time zone
 echo ""
-    tput setaf 5 ; tput bold ;echo "Preparing to select timezone, please wait a few seconds..."; tput sgr0;
+    tput setaf 5 ;tput blink;tput cuf 5; tput bold ;echo "Preparing to select timezone, please wait a few seconds..."; tput sgr0;
+echo " "
     sleep 30
     $PACKAGE_INSTALLER tzdata
     # setup server timezone
@@ -308,59 +309,47 @@ else
 	ln -s /usr/share/zoneinfo/$tz /etc/localtime
 	timedatectl set-timezone $tz
 fi
+echo " "
 if [[ "$adminL" == "" ]] ; then
     tput setaf 1 ; tput bold ;read -p "...... Enter Your Desired Admin Login Access: " adminL; tput sgr0;
-#echo " "
 else
     tput setaf 1 ; tput bold ;echo "Desired Admin Login Access set $adminL"; tput sgr0;    
-echo " "
 fi
 echo " "
 if [[ "$adminP" == "" ]] ; then
     tput setaf 2 ; tput bold ;read -p "...... Enter Your Desired Admin Password Access: " adminP; tput sgr0;
-#echo " "
 else
     tput setaf 2 ; tput bold ;echo "Desired Admin Password Access set $adminP"; tput sgr0;
-echo ""
 fi
 echo " "
 if [[ "$ACCESPORT" == "" ]] ; then
     tput setaf 3 ; tput bold ;read -p "...... Enter Your Desired Admin Port Access: " ACCESPORT; tput sgr0;
-#echo ""
 else
     tput setaf 3 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
-echo ""
 fi
 echo " "
 if [[ "$CLIENTACCESPORT" == "" ]] ; then
     tput setaf 4 ; tput bold ;read -p"...... Enter Your Desired Client Port Access: " CLIENTACCESPORT; tput sgr0;
-#echo ""
 else
     tput setaf 4 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
-echo " "
 fi
-echo ""
+echo " "
 if [[ "$APACHEACCESPORT" == "" ]] ; then
     tput setaf 5 ; tput bold ;read -p "...... Enter Your Desired Apache Port Access: " APACHEACCESPORT; tput sgr0;
 echo " "
 else
     tput setaf 5 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
-echo " "
 fi
 if [[ "$EMAIL" == "" ]] ; then
     tput setaf 6 ; tput bold ;read -p "...... Enter Your Email Addres: " EMAIL; tput sgr0;
-#echo " "
 else
     tput setaf 6 ; tput bold ;echo "Your Email Addres set $EMAIL"; tput sgr0;
-echo " "
 fi
 echo " "
 if [[ "$PASSMYSQL" == "" ]] ; then
     tput setaf 7 ; tput bold ;read -p "...... Enter Your Desired MYSQL Password: " PASSMYSQL; tput sgr0;
-#echo " "
 else
     tput setaf 7 ; tput bold ;echo "Desired MYSQL Password set $PASSMYSQL"; tput sgr0;
-echo " "
 fi
 echo " . "
 PORTSSH=22
@@ -369,7 +358,6 @@ Padmin=$(perl -e 'print crypt($ARGV[1], "\$" . $ARGV[0] . "\$" . $ARGV[2]), "\n"
 sleep 1
 if [[ "$silent" != "yes" ]] ; then
     tput setaf 3 ; tput bold ;read -e -p "All is ok. Do you want to install Xtream UI now (y/n)? " yn; tput sgr0;
-
 case $yn in
     [Yy]* ) break;;
     [Nn]* ) exit;;
@@ -378,6 +366,7 @@ fi
 #clear
 # ***************************************
 # Installation really starts here
+echo " "
     tput setaf 1 ;tput blink; tput bold ;tput cuf 20;echo "Installation really starts here" yn; tput sgr0;    
 echo " "
 #--- Set custom logging methods so we create a log file in the current working directory.
@@ -386,6 +375,7 @@ touch "$logfile"
 exec > >(tee "$logfile")
 exec 2>&1
     tput setaf 2 ;tput cuf 20; tput bold ;echo "Installing Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
+echo " "
     tput setaf 3 ; tput bold ;echo "at http://$ipaddr:$ACCESPORT on server under: $OS $VER $ARCH"; tput sgr0;
 echo " "
 uname -a
@@ -393,8 +383,9 @@ uname -a
 disable_file() {
     mv "$1" "$1_disabled_by_xtream_ui" &> /dev/null
 }
-wget -qO- https://github.com/dOC4eVER/ubuntu20.04/raw/master/depbuild.sh | bash
+wget -qO- https://github.com/dOC4eVER/ubuntu20.04/raw/master/ubuntu/depbuild.sh | bash
 #--- List all already installed packages (may help to debug)
+echo " "
     tput setaf 4 ; tput bold ;echo -e "\n-- Listing of all packages installed:"; tput sgr0;
 echo " "
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
@@ -402,15 +393,18 @@ if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
     dpkg --get-selections
 fi
+echo " "
 $PACKAGE_INSTALLER daemonize
 mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$PASSMYSQL'; flush privileges;"
+echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of Packages Done"; tput sgr0;
 echo " "
 sleep 1s
     tput setaf 4 ; tput bold ;echo -n "[+] Installation Of XtreamCodes..."; tput sgr0;
-echo ""	
+echo " "
 sleep 1s
 #### installation de xtream codes
+echo " "
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 adduser --system --shell /bin/false --group --disabled-login xtreamcodes
 else
@@ -424,10 +418,12 @@ rm -r /tmp/xtreamcodes.tar.gz
 mv $MYSQLCNF $MYSQLCNF.xc
 echo IyBYdHJlYW0gQ29kZXMNCg0KW2NsaWVudF0NCnBvcnQgICAgICAgICAgICA9IDMzMDYNCg0KW215c3FsZF9zYWZlXQ0KbmljZSAgICAgICAgICAgID0gMA0KDQpbbXlzcWxkXQ0KdXNlciAgICAgICAgICAgID0gbXlzcWwNCnBvcnQgICAgICAgICAgICA9IDc5OTkNCmJhc2VkaXIgICAgICAgICA9IC91c3INCmRhdGFkaXIgICAgICAgICA9IC92YXIvbGliL215c3FsDQp0bXBkaXIgICAgICAgICAgPSAvdG1wDQpsYy1tZXNzYWdlcy1kaXIgPSAvdXNyL3NoYXJlL215c3FsDQpza2lwLWV4dGVybmFsLWxvY2tpbmcNCnNraXAtbmFtZS1yZXNvbHZlPTENCg0KYmluZC1hZGRyZXNzICAgICAgICAgICAgPSAqDQprZXlfYnVmZmVyX3NpemUgPSAxMjhNDQoNCm15aXNhbV9zb3J0X2J1ZmZlcl9zaXplID0gNE0NCm1heF9hbGxvd2VkX3BhY2tldCAgICAgID0gNjRNDQpteWlzYW0tcmVjb3Zlci1vcHRpb25zID0gQkFDS1VQDQptYXhfbGVuZ3RoX2Zvcl9zb3J0X2RhdGEgPSA4MTkyDQpxdWVyeV9jYWNoZV9saW1pdCAgICAgICA9IDRNDQpxdWVyeV9jYWNoZV9zaXplICAgICAgICA9IDI1Nk0NCg0KDQpleHBpcmVfbG9nc19kYXlzICAgICAgICA9IDEwDQptYXhfYmlubG9nX3NpemUgICAgICAgICA9IDEwME0NCg0KbWF4X2Nvbm5lY3Rpb25zICA9IDIwMDAwDQpiYWNrX2xvZyA9IDQwOTYNCm9wZW5fZmlsZXNfbGltaXQgPSAyMDI0MA0KaW5ub2RiX29wZW5fZmlsZXMgPSAyMDI0MA0KbWF4X2Nvbm5lY3RfZXJyb3JzID0gMzA3Mg0KdGFibGVfb3Blbl9jYWNoZSA9IDQwOTYNCnRhYmxlX2RlZmluaXRpb25fY2FjaGUgPSA0MDk2DQoNCg0KdG1wX3RhYmxlX3NpemUgPSAxRw0KbWF4X2hlYXBfdGFibGVfc2l6ZSA9IDFHDQoNCmlubm9kYl9idWZmZXJfcG9vbF9zaXplID0gMTBHDQppbm5vZGJfYnVmZmVyX3Bvb2xfaW5zdGFuY2VzID0gMTANCmlubm9kYl9yZWFkX2lvX3RocmVhZHMgPSA2NA0KaW5ub2RiX3dyaXRlX2lvX3RocmVhZHMgPSA2NA0KaW5ub2RiX3RocmVhZF9jb25jdXJyZW5jeSA9IDANCmlubm9kYl9mbHVzaF9sb2dfYXRfdHJ4X2NvbW1pdCA9IDANCmlubm9kYl9mbHVzaF9tZXRob2QgPSBPX0RJUkVDVA0KcGVyZm9ybWFuY2Vfc2NoZW1hID0gMA0KaW5ub2RiLWZpbGUtcGVyLXRhYmxlID0gMQ0KaW5ub2RiX2lvX2NhcGFjaXR5PTIwMDAwDQppbm5vZGJfdGFibGVfbG9ja3MgPSAwDQppbm5vZGJfbG9ja193YWl0X3RpbWVvdXQgPSAwDQppbm5vZGJfZGVhZGxvY2tfZGV0ZWN0ID0gMA0KDQoNCnNxbC1tb2RlPSJOT19FTkdJTkVfU1VCU1RJVFVUSU9OIg0KDQpbbXlzcWxkdW1wXQ0KcXVpY2sNCnF1b3RlLW5hbWVzDQptYXhfYWxsb3dlZF9wYWNrZXQgICAgICA9IDE2TQ0KDQpbbXlzcWxdDQoNCltpc2FtY2hrXQ0Ka2V5X2J1ZmZlcl9zaXplICAgICAgICAgICAgICA9IDE2TQ0K | base64 --decode > $MYSQLCNF
 systemctl restart mariadb
+echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of XtreamCodes Done"; tput sgr0;
-echo " "	
+echo " "
     tput setaf 4 ; tput bold ;echo -n "[+] Configuration Of Mysql & Nginx..."; tput sgr0;
-echo " "	
+echo " "
+echo " "
 #### config database
 ## add python script
 python2 << END
@@ -487,11 +483,12 @@ sed -i "s|Padmin|$Padmin|g" install.sql
 sed -i "s|EMAIL|$EMAIL|g" install.sql
 mysql -u root -p$PASSMYSQL xtream_iptvpro < install.sql
 rm -f install.sql
-#
+echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Mysql & Nginx Done"; tput sgr0;
 echo " "	
     tput setaf 4 ; tput bold ;echo -n "[+] Configuration Of Crons & Autorisations..."; tput sgr0;
-echo " "	
+echo " "
+	echo " "
 rm -r /home/xtreamcodes/iptv_xtream_codes/database.sql
 if ! grep -q "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" /etc/sudoers; then
     tput setaf 3 ; tput bold ;echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers; tput sgr0;    
@@ -500,11 +497,9 @@ fi
 ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" /etc/fstab; then
     tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" >> /etc/fstab; tput sgr0;    
-echo " "	
 fi
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" /etc/fstab; then
-    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab; tput sgr0;    
-echo " "	
+    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab; tput sgr0;    	
 fi
 chmod -R 0777 /home/xtreamcodes
 cat > /home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf <<EOR
@@ -656,10 +651,12 @@ mysql -u root -p$PASSMYSQL xtream_iptvpro -e "UPDATE settings SET crypt_load_bal
 sed -i "s|;date.timezone =|date.timezone = $timezone|g" /home/xtreamcodes/iptv_xtream_codes/php/lib/php.ini
 #replace python by python2
 #local and security patching settings and admin_settings
+echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Crons & Autorisations Done"; tput sgr0;
-echo ""	
+echo " "	
     tput setaf 4 ; tput bold ;echo -n "[+] Old CK41 to dOC4eVER v01 Installation Of Admin Web Access..."; tput sgr0;    
-echo ""	
+echo " "
+echo " "				
 wget -q -O /tmp/update.zip https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/update.zip
 unzip -o /tmp/update.zip -d /tmp/update/
 chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
@@ -674,7 +671,7 @@ mysql -u root -p$PASSMYSQL xtream_iptvpro -e "UPDATE admin_settings SET value = 
 chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
 wget -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/GeoLite2.mmdb
 chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
-geoliteversion=$(wget -qO- https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/status.json | jq -r ".version")
+geoliteversion=$(wget -qO- https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/Geolite2_status.json | jq -r ".version")
 mysql -u root -p$PASSMYSQL xtream_iptvpro -e "UPDATE admin_settings SET value = '$geoliteversion' WHERE admin_settings.type = 'geolite2_version'; "
 chown xtreamcodes:xtreamcodes -R /home/xtreamcodes
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
@@ -693,45 +690,46 @@ chmod +x /home/xtreamcodes/iptv_xtream_codes/pytools/balancer.sh
 rm -f /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
+echo " "
     tput setaf 3 ; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
 echo " "	
     tput setaf 1 ; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
-echo " "	
-sleep 60
+echo " "
+sleep 10
 $PACKAGE_INSTALLER libaio-devel libmaxminddb-devel
 $PACKAGE_INSTALLER libaio-dev libmaxminddb-dev
 cd /tmp/
-sudo wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz
-tar -xzvf OpenSSL_1_1_1h.tar.gz
+sudo wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1w.tar.gz
+tar -xzvf OpenSSL_1_1_1w.tar.gz
 cd /root
-wget http://nginx.org/download/nginx-1.19.5.tar.gz
-tar -xzvf nginx-1.19.5.tar.gz
+wget http://nginx.org/download/nginx-1.24.0.tar.gz
+tar -xzvf nginx-1.24.0.tar.gz
 git clone https://github.com/leev/ngx_http_geoip2_module.git
-cd nginx-1.19.5
-./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp --http-fastcgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/fastcgi_temp --lock-path=/home/xtreamcodes/iptv_xtream_codes/tmp/nginx.lock --http-uwsgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/uwsgi_temp --http-scgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/scgi_temp --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx/nginx.pid --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_v2_module --with-pcre --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-mail --with-mail_ssl_module --with-file-aio --with-cpu-opt=generic --add-module=/root/ngx_http_geoip2_module --with-openssl=/tmp/openssl-OpenSSL_1_1_1h
+cd nginx-1.24.0
+./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp --http-fastcgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/fastcgi_temp --lock-path=/home/xtreamcodes/iptv_xtream_codes/tmp/nginx.lock --http-uwsgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/uwsgi_temp --http-scgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/scgi_temp --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx/nginx.pid --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_v2_module --with-pcre --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-mail --with-mail_ssl_module --with-file-aio --with-cpu-opt=generic --add-module=/root/ngx_http_geoip2_module --with-openssl=/tmp/openssl-OpenSSL_1_1_1w
 make
 rm -f /home/xtreamcodes/iptv_xtream_codes/nginx/sbin/nginx
 cp objs/nginx /home/xtreamcodes/iptv_xtream_codes/nginx/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx/sbin/nginx
 cd /tmp/
-rm -rf openssl-OpenSSL_1_1_1h
-tar -xzvf OpenSSL_1_1_1h.tar.gz
+rm -rf openssl-OpenSSL_1_1_1w
+tar -xzvf OpenSSL_1_1_1w.tar.gz
 cd /root
-rm -rf nginx-1.19.5 ngx_http_geoip2_module
-tar -xzvf nginx-1.19.5.tar.gz
+rm -rf nginx-1.24.0 ngx_http_geoip2_module
+tar -xzvf nginx-1.24.0.tar.gz
 git clone https://github.com/leev/ngx_http_geoip2_module.git
-wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.1.zip
-unzip v1.2.1.zip
-cd nginx-1.19.5
-./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/ --lock-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx_rtmp.lock --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx.pid --add-module=/root/nginx-rtmp-module-1.2.1 --with-pcre --without-http_rewrite_module --with-file-aio --with-cpu-opt=generic --with-openssl=/tmp/openssl-OpenSSL_1_1_1h --add-module=/root/ngx_http_geoip2_module --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
+wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.2.zip
+unzip v1.2.2.zip
+cd nginx-1.24.0
+./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/ --lock-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx_rtmp.lock --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx.pid --add-module=/root/nginx-rtmp-module-1.2.1 --with-pcre --without-http_rewrite_module --with-file-aio --with-cpu-opt=generic --with-openssl=/tmp/openssl-OpenSSL_1_1_1w --add-module=/root/ngx_http_geoip2_module --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
 make
 cd objs
 mv nginx nginx_rtmp
 rm -f /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
 cp nginx_rtmp /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
-cd /root
-rm -rf /tmp/OpenSSL_1_1_1h /tmp/openssl-OpenSSL_1_1_1h nginx-1.19.5 v1.2.1.zip nginx-rtmp-module-1.2.1 ngx_http_geoip2_module nginx-1.19.5.tar.gz
+d /root
+rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip nginx-rtmp-module-1.2.1 ngx_http_geoip2_module nginx-1.24.0.tar.gz
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
     tput setaf 3 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
@@ -741,27 +739,38 @@ echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
-            
-    tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;
-    tput setaf 1 ; tput bold ;echo " │ USERNAME->->->->->->->-: $adminL"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " │ PASSWORD->->->->->->>->: $adminP"; tput sgr0;
-    tput setaf 3 ; tput bold ;echo " │ CLIENT ACCES PORT->->->: $CLIENTACCESPORT"; tput sgr0;
-    tput setaf 4 ; tput bold ;echo " │ APACHE ACCES PORT->->->: $APACHEACCESPORT"; tput sgr0;
-    tput setaf 5 ; tput bold ;echo " │ EMAIL->->->->->->->->->: $EMAIL"; tput sgr0;
-    tput setaf 6 ; tput bold ;echo " │ MYSQL root PASS->->->  : $PASSMYSQL"; tput sgr0;
-    tput setaf 7 ; tput bold ;echo " │ MYSQL user_iptvpro PASS: $XPASS"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;										   
+    tput setaf 1 ; tput bold ;echo " │ USERNAME ->->->->->->->->->->: $adminL"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │ PASSWORD ->->->->->->->->->->: $adminP"; tput sgr0;
+    tput setaf 3 ; tput bold ;echo " │ ADMIN ACCES PORT ->->->->->->: $ACCESPORT"; tput sgr0;									   
+    tput setaf 4 ; tput bold ;echo " │ CLIENT ACCES PORT->->->->->->: $CLIENTACCESPORT"; tput sgr0;
+    tput setaf 5 ; tput bold ;echo " │ APACHE ACCES PORT->->->->->->: $APACHEACCESPORT"; tput sgr0;
+    tput setaf 6 ; tput bold ;echo " │ EMAIL->->->->->->->->->->->->: $EMAIL"; tput sgr0;
+    tput setaf 7 ; tput bold ;echo " │ MYSQL root PASS->->->->->->->: $PASSMYSQL"; tput sgr0;
+    tput setaf 8 ; tput bold ;echo " │ MYSQL user_iptvpro PASS->->->: $XPASS"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
 
 ######################################################################
 ## copy info to file text
-    tput setaf 2 ; tput bold ;echo " ┌───────────────────────────  INFO  ────────────────────────────────┐"; tput sgr0;
-    tput setaf 0 ; tput bold ;echo " │PANEL ACCESS->->->->->->->: http://$ipaddr:$ACCESPORT"; tput sgr0;
-    tput setaf 1 ; tput bold ;echo " │"; USERNAME->->->->->->->-: $adminL"  ; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " │"; PASSWORD>->->->->->->->: $adminP"; tput sgr0;
-    tput setaf 3 ; tput bold ;echo " │"; CLIENT ACCES PORT->->->: $CLIENTACCESPORT"; tput sgr0;
-    tput setaf 4 ; tput bold ;echo " │"; APACHE ACCES PORT->->->: $APACHEACCESPORT"; tput sgr0;
-    tput setaf 5 ; tput bold ;echo " │"; EMAIL->->->->->->->->->: $EMAIL"; tput sgr0;
-    tput setaf 6 ; tput bold ;echo " │"; MYSQL root PASS->->->->: $PASSMYSQL"; tput sgr0;
-    tput setaf 7 ; tput bold ;echo " │"; MYSQL user_iptvpro PASS: $XPASS"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
->> /root/Xtreaminfo.txt
+echo "
+
+┌──────────────────────────  INFO  ─────────────────────────────────
+│
+│ PANEL ACCESS: http://$ipaddr:$ACCESPORT
+│
+│ USERNAME: $adminL
+│
+│ PASSWORD: $adminP
+│
+│ CLIENT ACCES PORT: $CLIENTACCESPORT
+│
+│ APACHE ACCES PORT: $APACHEACCESPORT
+│
+│ EMAIL   : $EMAIL
+│													 
+│ MYSQL root PASS: $PASSMYSQL
+│
+│ MYSQL user_iptvpro PASS: $XPASS
+│ 
+└───────────────────────────────────────────────────────────────────
+echo " >> /root/Xtreaminfo.txt
