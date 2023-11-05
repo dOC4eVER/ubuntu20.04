@@ -725,7 +725,7 @@ echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
-    tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " ─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ USERNAME ->->->->->->->->->->: $adminL"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " │ PASSWORD ->->->->->->->->->->: $adminP"; tput sgr0;
     tput setaf 3 ; tput bold ;echo " │ ADMIN ACCES PORT ->->->->->->: $ACCESPORT"; tput sgr0;
@@ -734,7 +734,7 @@ echo " └───────────────────────�
     tput setaf 6 ; tput bold ;echo " │ EMAIL->->->->->->->->->->->->: $EMAIL"; tput sgr0;
     tput setaf 7 ; tput bold ;echo " │ MYSQL root PASS->->->->->->->: $PASSMYSQL"; tput sgr0;
     tput setaf 8 ; tput bold ;echo " │ MYSQL user_iptvpro PASS->->->: $XPASS"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " ───────────────────────────────────────────────────────────────────┘"; tput sgr0;
 ######################################################################
 ## copy info to file text
 echo "
