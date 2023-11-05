@@ -639,7 +639,7 @@ sed -i "s|;date.timezone =|date.timezone = $timezone|g" /home/xtreamcodes/iptv_x
 #local and security patching settings and admin_settings
 echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Crons & Autorisations Done"; tput sgr0;
-echo " "	
+echo " "
     tput setaf 4 ; tput bold ;echo -n "[+] Old CK41 to dOC4eVER v01 Installation Of Admin Web Access..."; tput sgr0;    
 echo " "
 echo " "
