@@ -139,9 +139,9 @@ elif [ -f /etc/os-release ]; then
 fi
 ARCH=$(uname -m)
 if [[ "$VER" = "8" && "$OS" = "CentOs" ]]; then
-    tput setaf 3 ; tput bold ;echo "Centos 8 obsolete udate to CentOS-Stream 8"; tput sgr0;    
+    tput setaf 3 ; tput bold ;echo "Centos 8 obsolete udate to CentOS-Stream 8"; tput sgr0;
 echo " "	
-    tput setaf 1 ; tput bold ;echo "this operation may take some time"; tput sgr0;    
+    tput setaf 1 ; tput bold ;echo "this operation may take some time"; tput sgr0;
 echo " "	
 	sleep 60
 	# change repository to use vault.centos.org CentOS 8 found online to vault.centos.org
@@ -166,7 +166,7 @@ echo " "
 	find / -name '*.rpmsave' -exec rm -f {} \;
 	OS="Centos Stream"
 	fi
-    tput setaf 3 ; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;    
+    tput setaf 3 ; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;
 echo ""	
 #if [[ "$OS" = "CentOs" && ("$VER" = "6" || "$VER" = "7" || "$VER" = "8" ) ||
 #      "$OS" = "Fedora" && ("$VER" = "34" || "$VER" = "35" ) ||
@@ -180,25 +180,25 @@ if [[ "$OS" = "Ubuntu" && ("$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.
     tput setaf 2 ; tput bold ;echo "Ok."; tput sgr0;    
 #echo ""
 else
-    tput setaf 1 ; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;    
+    tput setaf 1 ; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;
 echo " "
 	exit 1
 fi
 # Check if the user is 'root' before allowing installation to commence
 if [ $UID -ne 0 ]; then
-    tput setaf 4 ; tput bold ;echo "Install failed: you must be logged in as 'root' to install."; tput sgr0;    
+    tput setaf 4 ; tput bold ;echo "Install failed: you must be logged in as 'root' to install."; tput sgr0;
 echo ""
-    tput setaf 4 ; tput bold ;echo "Use command 'sudo -i', then enter root password and then try again."; tput sgr0;    
+    tput setaf 4 ; tput bold ;echo "Use command 'sudo -i', then enter root password and then try again."; tput sgr0;
 echo ""
     exit 1
 fi
 if [ -e /usr/local/cpanel ] || [ -e /usr/local/directadmin ] || [ -e /usr/local/solusvm/www ] || [ -e /usr/local/home/admispconfig ] || [ -e /usr/local/lxlabs/kloxo ] || [ -e /home/zpanel ] || [ -e /home/sentora ] ; then
 echo ""
-    tput setaf 4 ; tput bold ;echo "It appears that a control panel is already installed on your server; This installer"; tput sgr0;    
+    tput setaf 4 ; tput bold ;echo "It appears that a control panel is already installed on your server; This installer"; tput sgr0;
 echo ""
-    tput setaf 4 ; tput bold ;echo "is designed to install and configure Sentora on a clean OS installation only."; tput sgr0;    
+    tput setaf 4 ; tput bold ;echo "is designed to install and configure Sentora on a clean OS installation only."; tput sgr0;
 echo ""
-    tput setaf 4 ; tput bold ;echo -e "\nPlease re-install your OS before attempting to install using this script."; tput sgr0;    
+    tput setaf 4 ; tput bold ;echo -e "\nPlease re-install your OS before attempting to install using this script."; tput sgr0;
 echo ""
     exit 1
 fi
@@ -230,7 +230,7 @@ elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 fi
 #--- Prepare or query informations required to install
 # Update repositories and Install wget and util used to grab server IP
-    tput setaf 6 ; tput bold ;echo -e "\n-- Installing wget and dns utils required to manage inputs"; tput sgr0;    
+    tput setaf 6 ; tput bold ;echo -e "\n-- Installing wget and dns utils required to manage inputs"; tput sgr0;
 echo ""
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
 	$PACKAGE_INSTALLER $PACKAGE_UTILS
@@ -312,26 +312,34 @@ fi
 echo " "
 if [[ "$adminL" == "" ]] ; then
     tput setaf 1 ; tput bold ;read -p "...... Enter Your Desired Admin Login Access: " adminL; tput sgr0;
+
 else
-    tput setaf 1 ; tput bold ;echo "Desired Admin Login Access set $adminL"; tput sgr0;    
+    tput setaf 1 ; tput bold ;echo "Desired Admin Login Access set $adminL"; tput sgr0;
+
 fi
 echo " "
 if [[ "$adminP" == "" ]] ; then
     tput setaf 2 ; tput bold ;read -p "...... Enter Your Desired Admin Password Access: " adminP; tput sgr0;
+
 else
     tput setaf 2 ; tput bold ;echo "Desired Admin Password Access set $adminP"; tput sgr0;
+
 fi
 echo " "
 if [[ "$ACCESPORT" == "" ]] ; then
     tput setaf 3 ; tput bold ;read -p "...... Enter Your Desired Admin Port Access: " ACCESPORT; tput sgr0;
+
 else
     tput setaf 3 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
+
 fi
 echo " "
 if [[ "$CLIENTACCESPORT" == "" ]] ; then
     tput setaf 4 ; tput bold ;read -p"...... Enter Your Desired Client Port Access: " CLIENTACCESPORT; tput sgr0;
+
 else
     tput setaf 4 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
+
 fi
 echo " "
 if [[ "$APACHEACCESPORT" == "" ]] ; then
@@ -339,17 +347,22 @@ if [[ "$APACHEACCESPORT" == "" ]] ; then
 echo " "
 else
     tput setaf 5 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
+
 fi
 if [[ "$EMAIL" == "" ]] ; then
     tput setaf 6 ; tput bold ;read -p "...... Enter Your Email Addres: " EMAIL; tput sgr0;
+
 else
     tput setaf 6 ; tput bold ;echo "Your Email Addres set $EMAIL"; tput sgr0;
+
 fi
 echo " "
 if [[ "$PASSMYSQL" == "" ]] ; then
     tput setaf 7 ; tput bold ;read -p "...... Enter Your Desired MYSQL Password: " PASSMYSQL; tput sgr0;
+
 else
     tput setaf 7 ; tput bold ;echo "Desired MYSQL Password set $PASSMYSQL"; tput sgr0;
+
 fi
 echo " . "
 PORTSSH=22
@@ -358,6 +371,7 @@ Padmin=$(perl -e 'print crypt($ARGV[1], "\$" . $ARGV[0] . "\$" . $ARGV[2]), "\n"
 sleep 1
 if [[ "$silent" != "yes" ]] ; then
     tput setaf 3 ; tput bold ;read -e -p "All is ok. Do you want to install Xtream UI now (y/n)? " yn; tput sgr0;
+
 case $yn in
     [Yy]* ) break;;
     [Nn]* ) exit;;
@@ -367,7 +381,7 @@ fi
 # ***************************************
 # Installation really starts here
 echo " "
-    tput setaf 1 ;tput blink; tput bold ;tput cuf 20;echo "Installation really starts here" yn; tput sgr0;    
+    tput setaf 1 ;tput blink; tput bold ;tput cuf 20;echo "Installation really starts here" yn; tput sgr0;
 echo " "
 #--- Set custom logging methods so we create a log file in the current working directory.
 logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
@@ -488,7 +502,7 @@ echo " "
 echo " "	
     tput setaf 4 ; tput bold ;echo -n "[+] Configuration Of Crons & Autorisations..."; tput sgr0;
 echo " "
-	echo " "
+echo " "
 rm -r /home/xtreamcodes/iptv_xtream_codes/database.sql
 if ! grep -q "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" /etc/sudoers; then
     tput setaf 3 ; tput bold ;echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers; tput sgr0;    
@@ -499,7 +513,7 @@ if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,n
     tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" >> /etc/fstab; tput sgr0;    
 fi
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" /etc/fstab; then
-    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab; tput sgr0;    	
+    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab; tput sgr0;
 fi
 chmod -R 0777 /home/xtreamcodes
 cat > /home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf <<EOR
@@ -656,7 +670,7 @@ echo " "
 echo " "	
     tput setaf 4 ; tput bold ;echo -n "[+] Old CK41 to dOC4eVER v01 Installation Of Admin Web Access..."; tput sgr0;    
 echo " "
-echo " "				
+echo " "
 wget -q -O /tmp/update.zip https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/update.zip
 unzip -o /tmp/update.zip -d /tmp/update/
 chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
@@ -728,7 +742,7 @@ mv nginx nginx_rtmp
 rm -f /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
 cp nginx_rtmp /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
-d /root
+cd /root
 rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip nginx-rtmp-module-1.2.1 ngx_http_geoip2_module nginx-1.24.0.tar.gz
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
@@ -739,10 +753,11 @@ echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
-    tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;										   
+
+    tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ USERNAME ->->->->->->->->->->: $adminL"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " │ PASSWORD ->->->->->->->->->->: $adminP"; tput sgr0;
-    tput setaf 3 ; tput bold ;echo " │ ADMIN ACCES PORT ->->->->->->: $ACCESPORT"; tput sgr0;									   
+    tput setaf 3 ; tput bold ;echo " │ ADMIN ACCES PORT ->->->->->->: $ACCESPORT"; tput sgr0;
     tput setaf 4 ; tput bold ;echo " │ CLIENT ACCES PORT->->->->->->: $CLIENTACCESPORT"; tput sgr0;
     tput setaf 5 ; tput bold ;echo " │ APACHE ACCES PORT->->->->->->: $APACHEACCESPORT"; tput sgr0;
     tput setaf 6 ; tput bold ;echo " │ EMAIL->->->->->->->->->->->->: $EMAIL"; tput sgr0;
@@ -767,10 +782,10 @@ echo "
 │ APACHE ACCES PORT: $APACHEACCESPORT
 │
 │ EMAIL   : $EMAIL
-│													 
+│
 │ MYSQL root PASS: $PASSMYSQL
 │
 │ MYSQL user_iptvpro PASS: $XPASS
 │ 
 └───────────────────────────────────────────────────────────────────
-echo " >> /root/Xtreaminfo.txt
+" >> /root/Xtreaminfo.txt
