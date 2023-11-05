@@ -86,7 +86,6 @@ while getopts ":t:a:p:o:c:r:e:m:s:h:" option; do
             ;;
     esac
 done
-
 #clear
 XC_VERSION="41 dOC4eVER v01"
 PANEL_PATH="/home/xtreamcodes/iptv_xtream_codes"
@@ -178,11 +177,10 @@ if [[ "$OS" = "Ubuntu" && ("$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.
 "$OS" = "Centos Stream" && "$VER" = "8" && "$ARCH" == "x86_64" ||
 "$OS" = "Fedora" && ("$VER" = "36" || "$VER" = "37" || "$VER" = "38" ) && "$ARCH" == "x86_64" ]] ; then
     tput setaf 2 ; tput bold ;echo "Ok."; tput sgr0;    
-#echo ""
 else
     tput setaf 1 ; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;
 echo " "
-	exit 1
+    exit 1
 fi
 # Check if the user is 'root' before allowing installation to commence
 if [ $UID -ne 0 ]; then
@@ -312,34 +310,26 @@ fi
 echo " "
 if [[ "$adminL" == "" ]] ; then
     tput setaf 1 ; tput bold ;read -p "...... Enter Your Desired Admin Login Access: " adminL; tput sgr0;
-
 else
     tput setaf 1 ; tput bold ;echo "Desired Admin Login Access set $adminL"; tput sgr0;
-
 fi
 echo " "
 if [[ "$adminP" == "" ]] ; then
     tput setaf 2 ; tput bold ;read -p "...... Enter Your Desired Admin Password Access: " adminP; tput sgr0;
-
 else
     tput setaf 2 ; tput bold ;echo "Desired Admin Password Access set $adminP"; tput sgr0;
-
 fi
 echo " "
 if [[ "$ACCESPORT" == "" ]] ; then
     tput setaf 3 ; tput bold ;read -p "...... Enter Your Desired Admin Port Access: " ACCESPORT; tput sgr0;
-
 else
     tput setaf 3 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
-
 fi
 echo " "
 if [[ "$CLIENTACCESPORT" == "" ]] ; then
     tput setaf 4 ; tput bold ;read -p"...... Enter Your Desired Client Port Access: " CLIENTACCESPORT; tput sgr0;
-
 else
     tput setaf 4 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
-
 fi
 echo " "
 if [[ "$APACHEACCESPORT" == "" ]] ; then
@@ -347,22 +337,17 @@ if [[ "$APACHEACCESPORT" == "" ]] ; then
 echo " "
 else
     tput setaf 5 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
-
 fi
 if [[ "$EMAIL" == "" ]] ; then
     tput setaf 6 ; tput bold ;read -p "...... Enter Your Email Addres: " EMAIL; tput sgr0;
-
 else
     tput setaf 6 ; tput bold ;echo "Your Email Addres set $EMAIL"; tput sgr0;
-
 fi
 echo " "
 if [[ "$PASSMYSQL" == "" ]] ; then
     tput setaf 7 ; tput bold ;read -p "...... Enter Your Desired MYSQL Password: " PASSMYSQL; tput sgr0;
-
 else
     tput setaf 7 ; tput bold ;echo "Desired MYSQL Password set $PASSMYSQL"; tput sgr0;
-
 fi
 echo " . "
 PORTSSH=22
@@ -371,7 +356,6 @@ Padmin=$(perl -e 'print crypt($ARGV[1], "\$" . $ARGV[0] . "\$" . $ARGV[2]), "\n"
 sleep 1
 if [[ "$silent" != "yes" ]] ; then
     tput setaf 3 ; tput bold ;read -e -p "All is ok. Do you want to install Xtream UI now (y/n)? " yn; tput sgr0;
-
 case $yn in
     [Yy]* ) break;;
     [Nn]* ) exit;;
@@ -499,7 +483,7 @@ mysql -u root -p$PASSMYSQL xtream_iptvpro < install.sql
 rm -f install.sql
 echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Mysql & Nginx Done"; tput sgr0;
-echo " "	
+echo " "
     tput setaf 4 ; tput bold ;echo -n "[+] Configuration Of Crons & Autorisations..."; tput sgr0;
 echo " "
 echo " "
@@ -519,7 +503,6 @@ chmod -R 0777 /home/xtreamcodes
 cat > /home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf <<EOR
 user  xtreamcodes;
 worker_processes  auto;
-
 worker_rlimit_nofile 300000;
 events {
     worker_connections  16000;
@@ -529,10 +512,8 @@ events {
 }
 thread_pool pool_xtream threads=32 max_queue=0;
 http {
-
     include       mime.types;
     default_type  application/octet-stream;
-
     sendfile           on;
     tcp_nopush         on;
     tcp_nodelay        on;
@@ -549,7 +530,6 @@ http {
 	client_body_timeout 13s;
 	client_header_timeout 13s;
 	client_max_body_size 3m;
-
 	limit_req_zone \$binary_remote_addr zone=one:30m rate=20r/s;
     server {
         listen $CLIENTACCESPORT;listen 25463 ssl;ssl_certificate server.crt;ssl_certificate_key server.key; ssl_protocols SSLv3 TLSv1.1 TLSv1.2;
@@ -557,11 +537,9 @@ http {
         root /home/xtreamcodes/iptv_xtream_codes/wwwdir/;
         server_tokens off;
         chunked_transfer_encoding off;
-
 		if ( \$request_method !~ ^(GET|POST)\$ ) {
 			return 200;
 		}
-
         rewrite_log on;
         rewrite ^/live/(.*)/(.*)/(.*)\.(.*)\$ /streaming/clients_live.php?username=\$1&password=\$2&stream=\$3&extension=\$4 break;
         rewrite ^/movie/(.*)/(.*)/(.*)\$ /streaming/clients_movie.php?username=\$1&password=\$2&stream=\$3&type=movie break;
@@ -573,15 +551,12 @@ http {
 		rewrite ^/hlsr/(.*)/(.*)/(.*)/(.*)/(.*)/(.*)\$ /streaming/clients_live.php?token=\$1&username=\$2&password=\$3&segment=\$6&stream=\$4&key_seg=\$5 break;
 		rewrite ^/timeshift/(.*)/(.*)/(.*)/(.*)/(.*)\.(.*)\$ /streaming/timeshift.php?username=\$1&password=\$2&stream=\$5&extension=\$6&duration=\$3&start=\$4 break;
 		rewrite ^/timeshifts/(.*)/(.*)/(.*)/(.*)/(.*)\.(.*)\$ /streaming/timeshift.php?username=\$1&password=\$2&stream=\$4&extension=\$6&duration=\$3&start=\$5 break;
-		
 		rewrite ^/(.*)/(.*)/(\d+)\$ /streaming/clients_live.php?username=\$1&password=\$2&stream=\$3&extension=ts break;
 		#add pvr support
 		rewrite ^/server/load.php\$ /portal.php break;
-		
 		location /stalker_portal/c {
 			alias /home/xtreamcodes/iptv_xtream_codes/wwwdir/c;
 		}
-		
 		#FFmpeg Report Progress
 		location = /progress.php {
 		    allow 127.0.0.1;
@@ -592,8 +567,7 @@ http {
 			fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
 			fastcgi_param SCRIPT_NAME \$fastcgi_script_name;
 		}
-
-
+  
         location ~ \.php\$ {
 			limit_req zone=one burst=8;
             try_files \$uri =404;
@@ -613,7 +587,6 @@ http {
         listen $ACCESPORT;
         index index.php index.html index.htm;
         root /home/xtreamcodes/iptv_xtream_codes/admin/;
-
         location ~ \.php\$ {
 			limit_req zone=one burst=8;
             try_files \$uri =404;
@@ -630,7 +603,6 @@ http {
         }
     }
     #ISP CONFIGURATION
-
     server {
          listen 8805;
          root /home/xtreamcodes/iptv_xtream_codes/isp/;
@@ -706,7 +678,7 @@ wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /ho
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 echo " "
     tput setaf 3 ; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
-echo " "	
+echo " "
     tput setaf 1 ; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
 echo " "
 sleep 10
@@ -753,7 +725,6 @@ echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
-
     tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ USERNAME ->->->->->->->->->->: $adminL"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " │ PASSWORD ->->->->->->->->->->: $adminP"; tput sgr0;
@@ -764,11 +735,9 @@ echo " └───────────────────────�
     tput setaf 7 ; tput bold ;echo " │ MYSQL root PASS->->->->->->->: $PASSMYSQL"; tput sgr0;
     tput setaf 8 ; tput bold ;echo " │ MYSQL user_iptvpro PASS->->->: $XPASS"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
-
 ######################################################################
 ## copy info to file text
 echo "
-
 ┌──────────────────────────  INFO  ─────────────────────────────────
 │
 │ PANEL ACCESS: http://$ipaddr:$ACCESPORT
