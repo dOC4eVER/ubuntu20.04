@@ -15,7 +15,7 @@
 
 
 
-### Restaurer l'ancien Panel et effacer le repertoire "old"
+### Restore the old Panel and delete the "old" directory
 
     wget https://github.com/dOC4eVER/ubuntu20.04/releases/tag/start/Downgrade_old_panel.sh -O /tmp/install.sh && bash /tmp/Downgrade_old_panel.sh
     
