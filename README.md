@@ -27,7 +27,4 @@
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/sub_install.sh -O /tmp/sub_install.sh && bash /tmp/sub_install.sh
 
 
-
-
-
 * (dOC4eVER) 2023
