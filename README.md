@@ -9,7 +9,7 @@
 
 
 
-### To upgrade an existing Panel only, with a backup of the /admin & /pytools directories in *.old in case you want to go back 
+### To upgrade an existing Panel only, with a backup of the /admin & /pytools directories in *.old in case you want to go back
  
     wget https://github.com/dOC4eVER/ubuntu20.04/releases/tag/start/Update_dOC4eVER.sh -O /tmp/install.sh && bash /tmp/Update_dOC4eVER.sh
 
@@ -22,7 +22,7 @@
 
 
 
-### The new load balancer must be installed manually only after adding the load balancer.
+### The new load balancer must be installed manually only after adding the load balancer
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/sub_install.sh -O /tmp/sub_install.sh && bash /tmp/sub_install.sh
 
