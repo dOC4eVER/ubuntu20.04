@@ -705,7 +705,7 @@ git clone https://github.com/leev/ngx_http_geoip2_module.git
 wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.2.zip
 unzip v1.2.2.zip
 cd nginx-1.24.0
-./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/ --lock-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx_rtmp.lock --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx.pid --add-module=/root/nginx-rtmp-module-1.2.2 --with-pcre --without-http_rewrite_module --with-file-aio --with-cpu-opt=generic --with-openssl=/tmp/openssl-OpenSSL_1_1_1w --add-module=/root/ngx_http_geoip2_module --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
+./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/ --lock-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx_rtmp.lock --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx.pid --add-module=/root/nginx-rtmp-module-1.2.1 --with-pcre --without-http_rewrite_module --with-file-aio --with-cpu-opt=generic --with-openssl=/tmp/openssl-OpenSSL_1_1_1w --add-module=/root/ngx_http_geoip2_module --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
 make
 cd objs
 mv nginx nginx_rtmp
@@ -714,7 +714,7 @@ cp nginx_rtmp /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
 cd /root
 rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip nginx-rtmp-module-1.2.2 ngx_http_geoip2_module nginx-1.24.0.tar.gz
-#fi
+#fi  
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
     tput setaf 3 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
@@ -724,16 +724,16 @@ echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
-    tput setaf 2 ; tput bold ;echo " ─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " ┌─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────┐"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ USERNAME ->->->->->->->->->->: $adminL"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " │ PASSWORD ->->->->->->->->->->: $adminP"; tput sgr0;
-    tput setaf 3 ; tput bold ;echo " │ ADMIN  ACCES PORT->->->->->->: $ACCESPORT"; tput sgr0;
+    tput setaf 3 ; tput bold ;echo " │ ADMIN ACCES PORT ->->->->->->: $ACCESPORT"; tput sgr0;
     tput setaf 4 ; tput bold ;echo " │ CLIENT ACCES PORT->->->->->->: $CLIENTACCESPORT"; tput sgr0;
     tput setaf 5 ; tput bold ;echo " │ APACHE ACCES PORT->->->->->->: $APACHEACCESPORT"; tput sgr0;
     tput setaf 6 ; tput bold ;echo " │ EMAIL->->->->->->->->->->->->: $EMAIL"; tput sgr0;
     tput setaf 7 ; tput bold ;echo " │ MYSQL root PASS->->->->->->->: $PASSMYSQL"; tput sgr0;
     tput setaf 8 ; tput bold ;echo " │ MYSQL user_iptvpro PASS->->->: $XPASS"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " ───────────────────────────────────────────────────────────────────"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
 ######################################################################
 ## copy info to file text
 echo "
