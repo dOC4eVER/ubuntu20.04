@@ -80,13 +80,13 @@ echo ""
 echo ""
     tput setaf 3 ;tput blink; tput bold ;tput cuf 20;echo "Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
 echo ""
-    tput setaf 1 ; tput bold ;tput cuf 5;echo "Supported Operating Systems:"; tput sgr0;
-    tput setaf 2 ; tput bold ;tput cuf 5;echo "Ubuntu server 18.04/20.04/22.04"; tput sgr0;
-    tput setaf 3 ; tput bold ;tput cuf 5;echo "CentOS 7.*"; tput sgr0;
-    tput setaf 4 ; tput bold ;tput cuf 5;echo "CentOS Stream 8.*"; tput sgr0;
-    tput setaf 5 ; tput bold ;tput cuf 5;echo "Fedora 34/35/36"; tput sgr0;
-    tput setaf 6 ; tput bold ;tput cuf 5;echo "Debian 10/11 "; tput sgr0;
-    tput setaf 7 ; tput bold ;tput cuf 5;echo "64bit online system "; tput sgr0;
+    tput setaf 1 ; tput bold ; tput cuf 5; cho "Supported Operating Systems:"; tput sgr0;
+    tput setaf 2 ; tput bold ; tput cuf 5; echo "Ubuntu server 18.04/20.04/22.04"; tput sgr0;
+    tput setaf 3 ; tput bold ; tput cuf 5; echo "CentOS 7.*"; tput sgr0;
+    tput setaf 4 ; tput bold ; tput cuf 5; echo "CentOS Stream 8.*"; tput sgr0;
+    tput setaf 5 ; tput bold ; tput cuf 5; echo "Fedora 34/35/36"; tput sgr0;
+    tput setaf 6 ; tput bold ; tput cuf 5; echo "Debian 10/11 "; tput sgr0;
+    tput setaf 7 ; tput bold ; tput cuf 5; echo "64bit online system "; tput sgr0;
 echo -e "\nChecking that minimal requirements are ok"
 echo ""
 # Ensure the OS is compatible with the launcher
@@ -120,9 +120,9 @@ elif [ -f /etc/os-release ]; then
 fi
 ARCH=$(uname -m)
 if [[ "$VER" = "8" && "$OS" = "CentOs" ]]; then
-    tput setaf 3 ; tput bold ;echo "Centos 8 obsolete udate to CentOS-Stream 8"; tput sgr0;
+    tput setaf 3 ; tput cuf 5; tput bold ;echo "Centos 8 obsolete udate to CentOS-Stream 8"; tput sgr0;
 echo " "	
-    tput setaf 1 ; tput bold ;echo "this operation may take some time"; tput sgr0;
+    tput setaf 1 ; tput cuf 5; tput bold ;echo "this operation may take some time"; tput sgr0;
 echo " "	
 	sleep 60
 	# change repository to use vault.centos.org CentOS 8 found online to vault.centos.org
@@ -145,35 +145,35 @@ echo " "
 	find / -name '*.rpmsave' -exec rm -f {} \;
 	OS="Centos Stream"
 	fi
-    tput setaf 3 ; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;
+    tput setaf 3 ; tput cuf 5; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;
 echo ""	
 if [[ "$OS" = "Ubuntu" && ("$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.04" ) && "$ARCH" == "x86_64" ||
 "$OS" = "debian" && ("$VER" = "10" || "$VER" = "11" ) && "$ARCH" == "x86_64" ||
 "$OS" = "CentOs" && ("$VER" = "6" || "$VER" = "7" || "$VER" = "8" ) && "$ARCH" == "x86_64" ||
 "$OS" = "Centos Stream" && "$VER" = "8" && "$ARCH" == "x86_64" ||
 "$OS" = "Fedora" && ("$VER" = "36" || "$VER" = "37" || "$VER" = "38" ) && "$ARCH" == "x86_64" ]] ; then
-    tput setaf 2 ; tput bold ;echo "Ok."; tput sgr0;    
+    tput setaf 2 ; tput cuf 5; tput bold ;echo "Ok."; tput sgr0;    
 #
 else
-    tput setaf 1 ; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;
+    tput setaf 1 ; tput cuf 5; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;
 echo " "
     exit 1
 fi
 # Check if the user is 'root' before allowing installation to commence
 if [ $UID -ne 0 ]; then
-    tput setaf 4 ; tput bold ;echo "Install failed: you must be logged in as 'root' to install."; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo "Install failed: you must be logged in as 'root' to install."; tput sgr0;
 echo ""
-    tput setaf 4 ; tput bold ;echo "Use command 'sudo -i', then enter root password and then try again."; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo "Use command 'sudo -i', then enter root password and then try again."; tput sgr0;
 echo ""
     exit 1
 fi
 if [ -e /usr/local/cpanel ] || [ -e /usr/local/directadmin ] || [ -e /usr/local/solusvm/www ] || [ -e /usr/local/home/admispconfig ] || [ -e /usr/local/lxlabs/kloxo ] || [ -e /home/zpanel ] || [ -e /home/sentora ] ; then
 echo ""
-    tput setaf 4 ; tput bold ;echo "It appears that a control panel is already installed on your server; This installer"; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo "It appears that a control panel is already installed on your server; This installer"; tput sgr0;
 echo ""
-    tput setaf 4 ; tput bold ;echo "is designed to install and configure Sentora on a clean OS installation only."; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo "is designed to install and configure Sentora on a clean OS installation only."; tput sgr0;
 echo ""
-    tput setaf 4 ; tput bold ;echo -e "\nPlease re-install your OS before attempting to install using this script."; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo -e "\nPlease re-install your OS before attempting to install using this script."; tput sgr0;
 echo ""
     exit 1
 fi
@@ -202,7 +202,7 @@ elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 fi
 #--- Prepare or query informations required to install
 # Update repositories and Install wget and util used to grab server IP
-    tput setaf 6 ; tput bold ;echo -e "\n-- Installing wget and dns utils required to manage inputs"; tput sgr0;
+    tput setaf 6 ; tput cuf 5; tput bold ;echo -e "\n-- Installing wget and dns utils required to manage inputs"; tput sgr0;
 echo ""
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
 	$PACKAGE_INSTALLER $PACKAGE_UTILS
@@ -266,9 +266,10 @@ logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
 touch "$logfile"
 exec > >(tee "$logfile")
 exec 2>&1
-    tput setaf 2 ; tput bold ;echo "Installing Load Balancer"; tput sgr0;
-echo " "
-    tput setaf 3 ; tput bold ;echo "at http://$ipaddr:$ACCESPORT on server under: $OS $VER $ARCH"; tput sgr0;
+ echo " "
+   tput setaf 2 ; tput cuf 5; tput bold ;echo "Installing Load Balancer"; tput sgr0;
+ echo " "
+   tput setaf 3 ; tput cuf 5; tput bold ;echo "at http://$ipaddr:$ACCESPORT on server under: $OS $VER $ARCH"; tput sgr0;
 echo " "
 uname -a
 # Function to disable a file by appending its name with _disabled
@@ -476,7 +477,7 @@ EOF
 fi
 #--- List all already installed packages (may help to debug)
 echo " "
-    tput setaf 4 ; tput bold ;echo -e "\n-- Listing of all packages installed:"; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo -e "\n-- Listing of all packages installed:"; tput sgr0;
 echo " "
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
     rpm -qa | sort
@@ -484,7 +485,8 @@ elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
     dpkg --get-selections
 fi
 	#--- Ensures that all packages are up to date
-    tput setaf 1 ; tput bold ;echo -e "\n-- Updating+upgrading system, it may take some time..."; tput sgr0;    
+echo " "
+    tput setaf 1 ; tput cuf 5; tput bold ;echo -e "\n-- Updating+upgrading system, it may take some time..."; tput sgr0;    
 echo " "	
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" ]]; then
     $PACKAGE_UPDATER
@@ -496,7 +498,8 @@ if [[ "$OS" = "Ubuntu" ]]; then
     apt-get purge libcurl3 -y
 fi
 #--- Install utility packages required by the installer and/or Sentora.
-    tput setaf 1 ; tput bold ;echo -e "\n-- Downloading and installing required tools..."; tput sgr0;    
+echo " "
+    tput setaf 1 ; tput cuf 5; tput bold ;echo -e "\n-- Downloading and installing required tools..."; tput sgr0;    
 echo " "	
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
     $PACKAGE_INSTALLER sudo vim make zip unzip chkconfig bash-completion
@@ -700,10 +703,10 @@ EOF
 	fi
 $PACKAGE_INSTALLER daemonize
 echo " "
-    tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of Packages Done"; tput sgr0;
+    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of Packages Done"; tput sgr0;
 echo " "
 sleep 1s
-    tput setaf 4 ; tput bold ;echo -n "[+] Installation Of Load Balancer..."; tput sgr0;
+    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Installation Of Load Balancer..."; tput sgr0;
 echo " "
 sleep 1s
 #### Installation Of Load Balancer
@@ -718,9 +721,9 @@ OSNAME=$(echo $OS | sed  "s| |.|g" )
 wget -q -O /tmp/xtreamcodes.tar.gz https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/sub_xui_"$OSNAME"_"$VER".tar.gz
 tar -xf "/tmp/xtreamcodes.tar.gz" -C "/home/xtreamcodes/"
 rm -r /tmp/xtreamcodes.tar.gz
-    tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of XtreamCodes Done"; tput sgr0;
+    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of XtreamCodes Done"; tput sgr0;
 echo " "
-    tput setaf 4 ; tput bold ;echo -n "[+] Configuration Of Mysql & Nginx..."; tput sgr0;    
+    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Configuration Of Mysql & Nginx..."; tput sgr0;    
 echo " "
 #### config database
 ## add python script
@@ -757,13 +760,13 @@ def encrypt(rHost="127.0.0.1", rUsername="user_iptvpro", rPassword="", rDatabase
     rf.close()
 encrypt(rHost, rUsername, rPassword, rDatabase, rServerID, rPort)
 END
-    tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Mysql & Nginx Done"; tput sgr0;
+    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Mysql & Nginx Done"; tput sgr0;
 echo " "
-    tput setaf 4 ; tput bold ;echo -n "[+] Configuration Of Crons & Autorisations..."; tput sgr0;    
+    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Configuration Of Crons & Autorisations..."; tput sgr0;    
 echo " "
 rm -r /home/xtreamcodes/iptv_xtream_codes/database.sql
 if ! grep -q "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" /etc/sudoers; then
-    tput setaf 3 ; tput bold ;echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers; tput sgr0;    
+    tput setaf 3 ; tput cuf 5; tput bold ;echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers; tput sgr0;    
 echo " "
 fi
 ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/
@@ -875,6 +878,7 @@ EOR
 sed -i "s|;date.timezone =|date.timezone = $timezone|g" /home/xtreamcodes/iptv_xtream_codes/php/lib/php.ini
 #replace python by python2
 #local and security patching settings and admin_settings
+echo " "
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Crons & Autorisations Done"; tput sgr0;
 echo " "
     tput setaf 4 ; tput bold ;echo -n "[+] Old CK41 to dOC4eVER v01 Installation Of Admin Web Access..."; tput sgr0;    
@@ -896,9 +900,9 @@ wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /ho
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
 echo " "
-    tput setaf 3 ; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
+    tput setaf 3 ; tput cuf 5; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
 echo " "
-    tput setaf 1 ; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
+    tput setaf 1 ; tput cuf 5; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
 echo " "
 sleep 10
 #sleep 60 ancienne valeur(dOC4eVER)
@@ -938,8 +942,9 @@ rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip n
 fi
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
-    tput setaf 3 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
 echo " "
-echo " ┌───────────────────────────────────────────────────────────────────┐ "
-echo " │[R]        Old CK41 to dOC4eVER Sub Installed successfully         │ "
-echo " └───────────────────────────────────────────────────────────────────┘ "
+    tput setaf 3 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
+echo " "
+echo " ─────────────────────────────────────────────────────────────────── "
+echo " │[R]        Old CK41 to dOC4eVER Sub Installed successfully       │ "
+echo " ─────────────────────────────────────────────────────────────────── "
