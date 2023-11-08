@@ -80,7 +80,7 @@ echo ""
 echo ""
     tput setaf 3 ;tput blink; tput bold ;tput cuf 20;echo "Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
 echo ""
-    tput setaf 1 ; tput bold ; tput cuf 5; cho "Supported Operating Systems:"; tput sgr0;
+    tput setaf 1 ; tput bold ; tput cuf 5; echo "Supported Operating Systems:"; tput sgr0;
     tput setaf 2 ; tput bold ; tput cuf 5; echo "Ubuntu server 18.04/20.04/22.04"; tput sgr0;
     tput setaf 3 ; tput bold ; tput cuf 5; echo "CentOS 7.*"; tput sgr0;
     tput setaf 4 ; tput bold ; tput cuf 5; echo "CentOS Stream 8.*"; tput sgr0;
