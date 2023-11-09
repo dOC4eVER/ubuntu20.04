@@ -832,7 +832,7 @@ if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 	apt-get -y --force-yes install libgeoip-dev
 	apt-get -y --force-yes install python
 	apt-get -y --force-yes install python2
-	apt-get -y --force-yes install python33
+	apt-get -y --force-yes install python3
 	apt-get -y --force-yes install e2fsprogs
 	apt-get -y --force-yes install wget
 	apt-get -y --force-yes install mcrypt

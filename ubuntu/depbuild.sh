@@ -600,7 +600,7 @@ if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 	apt-get -y install libgeoip-dev
 	apt-get -y install python
 	apt-get -y install python2
-	apt-get -y install python33
+	apt-get -y install python3
 	apt-get -y install e2fsprogs
 	apt-get -y install wget
 	apt-get -y install mcrypt
