@@ -3,7 +3,7 @@
 
 
 
-### New installation on Xtream UI on Ubuntu 18.04/20.04/22.04 Debian 10/11 CentOS 8 Fedora 34/35/36
+### New installation the Xtream UI on Ubuntu 18.04/20.04/22.04 Debian 10/11 CentOS 8 Fedora 34/35/36
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/install.sh -O /tmp/install.sh && bash /tmp/install.sh
 
