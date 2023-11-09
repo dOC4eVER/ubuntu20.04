@@ -22,7 +22,7 @@
 
 
 
-### The new load balancer must be installed manually only after adding the load balancer
+### The new load balancer must be installed manually only after adding the load balancer not tested
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/sub_install.sh -O /tmp/sub_install.sh && bash /tmp/sub_install.sh
 
