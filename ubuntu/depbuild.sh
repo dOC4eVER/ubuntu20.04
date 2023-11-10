@@ -36,7 +36,7 @@ elif [ -f /etc/os-release ]; then
 fi
 ARCH=$(uname -m)
 if [[ "$VER" = "8" && "$OS" = "CentOs" ]]; then
-    tput setaf 2 ; tput bold ;echo "update exists."; tput sgr0;    
+    tput setaf 2 ; tput bold ;echo "Centos 8 obsolete udate to CentOS-Stream 8"; tput sgr0;    
 echo " "	
     tput setaf 3 ; tput bold ;echo "this operation may take some time"; tput sgr0;    
 echo " "	
@@ -79,7 +79,7 @@ else
 echo ""
     exit 1
 fi
-    tput setaf 6 ; tput bold ;echo -e "\n...... Updating repositories and packages sources"; tput sgr0;    
+    tput setaf 6 ; tput bold ;echo -e "\n-- Updating repositories and packages sources"; tput sgr0;    
 echo ""
 if [[ "$OS" = "CentOs" ]] ; then
     PACKAGE_INSTALLER="yum -y install"
@@ -137,7 +137,7 @@ if [[ "$OS" = "CentOs" || "$OS" = "CentOS-Stream" || "$OS" = "Fedora" ]]; then
 cat > /etc/yum.repos.d/mariadb.repo <<EOF
 [mariadb]
 name=MariaDB RPM source
-baseurl=http://mirror.mariadb.org/yum/11.0.1/rhel/$VER/x86_64/
+baseurl=http://mirror.mariadb.org/yum/10.6/rhel/$VER/x86_64/
 enabled=1
 gpgcheck=0
 EOF
@@ -145,7 +145,7 @@ EOF
 cat > /etc/yum.repos.d/mariadb.repo <<EOF
 [mariadb]
 name=MariaDB RPM source
-baseurl=http://mirror.mariadb.org/yum/11.0.1/fedora/$VER/x86_64/
+baseurl=http://mirror.mariadb.org/yum/10.6/fedora/$VER/x86_64/
 enabled=1
 gpgcheck=0
 EOF
@@ -540,7 +540,7 @@ EOF
 	add-apt-repository -y -s ppa:ondrej/php
 	apt-get update
 	apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-	add-apt-repository -y "deb [arch=amd64,arm64,ppc64el] https://mirrors.nxthost.com/mariadb/repo/11.1.1/ubuntu/ $(lsb_release -cs) main"
+	add-apt-repository -y "deb [arch=amd64,arm64,ppc64el] https://mirrors.nxthost.com/mariadb/repo/10.6/ubuntu/ $(lsb_release -cs) main"
 	apt-get update
 elif [[ "$OS" = "debian" ]]; then
 	DEBIAN_FRONTEND=noninteractive
@@ -566,7 +566,7 @@ EOF
 	apt-get install apt-apt-key --install-recommends -y
         apt-get update
 	apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-	add-apt-repository -y "deb [arch=amd64,arm64,ppc64el] https://mirrors.nxthost.com/mariadb/repo/11.0.1/debian/ $(lsb_release -cs) main"
+	add-apt-repository -y "deb [arch=amd64,arm64,ppc64el] https://mirrors.nxthost.com/mariadb/repo/10.6/debian/ $(lsb_release -cs) main"
 	apt-get update
 	apt-get -y install debhelper cdbs lintian build-essential fakeroot devscripts dh-make ca-certificates gpg reprepro
 cat > /etc/apt/sources.list.d/php.list <<EOF
@@ -586,6 +586,21 @@ if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 	DEBIAN_FRONTEND=noninteractive
 	export DEBIAN_FRONTEND=noninteractive
 	apt-get -y dist-upgrade
+ 	apt-get update
+	apt-get -y install build-essential
+ 	apt-get -y build-dep libfreetype-dev
+  	mkdir -p /home/xtreamcodes/iptv_xtream_codes/phpbuild/
+  	cd /home/xtreamcodes/iptv_xtream_codes/phpbuild/
+   	apt-get source libfreetype-dev
+   	cd /home/xtreamcodes/iptv_xtream_codes/phpbuild/freetype*/ && ./configure --prefix=/usr --without-bzip2 --without-harfbuzz --enable-freetype-config > /dev/null
+    	cd /home/xtreamcodes/iptv_xtream_codes/phpbuild/freetype*/ && make -j$(nproc --all) > /dev/null
+        cd /home/xtreamcodes/iptv_xtream_codes/phpbuild/freetype*/ && make install > /dev/null
+	cd
+	apt-get -y install apache2-dev
+	apt-get -y install autoconf
+	apt-get -y install automake
+	apt-get -y install bison
+	apt-get -y install chrpath
 	apt-get -y install debhelper 
 	apt-get -y install cdbs
 	apt-get -y install lintian
@@ -620,6 +635,8 @@ if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 	apt-get -y install postfix
 	apt-get -y dist-upgrade
 	apt-get -y install debhelper cdbs lintian build-essential fakeroot devscripts dh-make wget
+ 	apt-get -y install default-libmysqlclient-dev
+  	apt-get -y install libmysqlclient-dev
 	apt-get -y build-dep php7.4
 	apt-get -y install libmariadb-dev libmariadb-dev-compat libmariadbd-dev dbconfig-mysql
 	apt-get -y install autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev \
