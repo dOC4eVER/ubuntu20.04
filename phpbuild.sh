@@ -46,9 +46,9 @@ mkdir -p /root/phpbuild/
 cd /root/phpbuild/
 rm -rf /root/phpbuild/ngx_http_geoip2_module
 rm -rf /root/phpbuild/nginx-1.24.0
-rm -rf /root/phpbuild/openssl-OpenSSL_1_1_1h
-wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz -O /root/phpbuild/OpenSSL_1_1_1h.tar.gz
-tar -xzvf OpenSSL_1_1_1h.tar.gz
+rm -rf /root/phpbuild/openssl-OpenSSL_1_1_1w
+wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1w.tar.gz -O /root/phpbuild/OpenSSL_1_1_1w.tar.gz
+tar -xzvf OpenSSL_1_1_1w.tar.gz
 wget http://nginx.org/download/nginx-1.24.0.tar.gz -O /root/phpbuild/nginx-1.24.0.tar.gz
 tar -xzvf nginx-1.24.0.tar.gz
 git clone https://github.com/leev/ngx_http_geoip2_module.git /root/phpbuild/ngx_http_geoip2_module
@@ -58,11 +58,11 @@ wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.2.zip -O /root/phpbu
 unzip /root/phpbuild/v1.2.2.zip
 cd /root/phpbuild/nginx-1.24.0
 if [ -f "/usr/bin/dpkg-buildflags" ]; then
-    configureend="--with-openssl=/root/phpbuild/openssl-OpenSSL_1_1_1h --with-ld-opt='$(dpkg-buildflags --get LDFLAGS)' --with-cc-opt='$(dpkg-buildflags --get CFLAGS)'"
+    configureend="--with-openssl=/root/phpbuild/openssl-OpenSSL_1_1_1w --with-ld-opt='$(dpkg-buildflags --get LDFLAGS)' --with-cc-opt='$(dpkg-buildflags --get CFLAGS)'"
 elif [ -f "/usr/bin/rpm" ]; then
-    configureend="--with-openssl=/root/phpbuild/openssl-OpenSSL_1_1_1h --with-cc-opt='$(rpm --eval %{build_ldflags})' --with-cc-opt='$(rpm --eval %{optflags})'"
+    configureend="--with-openssl=/root/phpbuild/openssl-OpenSSL_1_1_1w --with-cc-opt='$(rpm --eval %{build_ldflags})' --with-cc-opt='$(rpm --eval %{optflags})'"
 else 
-    configureend="--with-openssl=/root/phpbuild/openssl-OpenSSL_1_1_1h"
+    configureend="--with-openssl=/root/phpbuild/openssl-OpenSSL_1_1_1w"
 fi
 ./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ \
 --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp \
@@ -121,9 +121,9 @@ fi
 cd /root/phpbuild/
 rm -rf /root/phpbuild/ngx_http_geoip2_module
 rm -rf /root/phpbuild/nginx-1.24.0
-rm -rf /root/phpbuild/openssl-OpenSSL_1_1_1h
-wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz -O /root/phpbuild/OpenSSL_1_1_1h.tar.gz
-tar -xzvf OpenSSL_1_1_1h.tar.gz
+rm -rf /root/phpbuild/openssl-OpenSSL_1_1_1w
+wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1w.tar.gz -O /root/phpbuild/OpenSSL_1_1_1w.tar.gz
+tar -xzvf OpenSSL_1_1_1w.tar.gz
 wget http://nginx.org/download/nginx-1.24.0.tar.gz -O /root/phpbuild/nginx-1.24.0.tar.gz
 tar -xzvf nginx-1.24.0.tar.gz
 git clone https://github.com/leev/ngx_http_geoip2_module.git /root/phpbuild/ngx_http_geoip2_module
@@ -191,37 +191,30 @@ echo ""
     exit 0
 fi
 cd /root/phpbuild/
-wget --no-check-certificate https://www.php.net/distributions/php-7.4.33.tar.gz -O /root/phpbuild/php-7.4.33.tar.gz
-rm -rf /root/phpbuild/php-7.4.33
-tar -xvf /root/phpbuild/php-7.4.33.tar.gz
-if [[ "$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.04" || "$VER" = "11" || "$VER" = "37" || "$VER" = "38" ]]; then
-wget --no-check-certificate "https://launchpad.net/~ondrej/+archive/ubuntu/php/+sourcefiles/php7.3/7.3.33-2+ubuntu22.04.1+deb.sury.org+1/php7.3_7.3.33-2+ubuntu22.04.1+deb.sury.org+1.debian.tar.xz" -O /root/phpbuild/debian.tar.xz
-tar -xf /root/phpbuild/debian.tar.xz
-rm -f /root/phpbuild/debian.tar.xz
-cd /root/phpbuild/php-7.4.33
-patch -p1 < ../debian/patches/0060-Add-minimal-OpenSSL-3.0-patch.patch
-else
-cd /root/phpbuild/php-7.4.33
-fi
-cd /root/phpbuild/
-#if [[ "$OS" = "debian"  ]] ; then
-#rm -f "/etc/apt/sources.list.d/alvistack.list"
-#echo "deb http://download.opensuse.org/repositories/home:/alvistack/Debian_${VER}/ /" | tee "/etc/apt/sources.list.d/alvistack.list"
-#wget --no-check-certificate -qO- "http://download.opensuse.org/repositories/home:/alvistack/Debian_${VER}/Release.key" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/alvistack.gpg > /dev/null
-#fi
-wget --no-check-certificate https://download.savannah.gnu.org/releases/freetype/freetype-2.13.0.tar.gz -O /root/phpbuild/freetype-2.13.0.tar.gz
-tar -xvf /root/phpbuild/freetype-2.13.0.tar.gz
-cd /root/phpbuild/freetype-2.13.0
-./autogen.sh
-./configure --enable-freetype-config --prefix=/home/xtreamcodes/iptv_xtream_codes/freetype2
-make -j$(nproc --all)
-make install
-if [ ! -f "/home/xtreamcodes/iptv_xtream_codes/freetype2/bin/freetype-config" ]; then
-    echo "freetype build error"
-    exit 0
-fi
-cd /root/phpbuild/php-7.4.33
-'./configure'  '--prefix=/home/xtreamcodes/iptv_xtream_codes/php' '--with-zlib-dir' '--with-freetype-dir=/home/xtreamcodes/iptv_xtream_codes/freetype2' '--enable-mbstring' '--enable-calendar' '--with-curl' '--with-gd' '--disable-rpath' '--enable-inline-optimization' '--with-bz2' '--with-zlib' '--enable-sockets' '--enable-sysvsem' '--enable-sysvshm' '--enable-pcntl' '--enable-mbregex' '--enable-exif' '--enable-bcmath' '--with-mhash' '--enable-zip' '--with-pcre-regex' '--with-pdo-mysql=mysqlnd' '--with-mysqli=mysqlnd' '--with-openssl' '--with-fpm-user=xtreamcodes' '--with-fpm-group=xtreamcodes' '--with-libdir=/lib/x86_64-linux-gnu' '--with-gettext' '--with-xmlrpc' '--with-xsl' '--enable-opcache' '--enable-fpm' '--enable-libxml' '--enable-static' '--disable-shared' '--with-jpeg-dir' '--enable-gd-jis-conv' '--with-webp-dir' '--with-xpm-dir'
+# php 7.4 include security patch php 8 backported to php 7.4 by Remi Collet
+# Oficial phpbuilder and security patch
+# Red Hat/Fedora system Remi Collet
+# https://blog.remirepo.net/pages/Config-en
+# Debian/Ubuntu system Ondřej Surý
+# https://launchpad.net/~ondrej/+archive/ubuntu/php
+# https://deb.sury.org/#debian-dpa
+# github with security patch
+# https://github.com/remicollet/php-src-security
+# since php 5 Remi Collet makes security patches and packages for RedHat/Fedora distributions
+# and Ondřej Surý the packages for the Debian/Ubuntu distribution based on the security patches which are provided by Remi Collet in this github repository
+wget --no-check-certificate https://github.com/remicollet/php-src-security/archive/refs/heads/PHP-7.4-security-backports.tar.gz
+tar -xvf PHP-7.4-security-backports.tar.gz
+cd php-src-security-PHP-7.4-security-backports
+./buildconf --force
+./configure  --prefix=/home/xtreamcodes/iptv_xtream_codes/php \
+--with-zlib-dir --with-freetype --enable-mbstring --enable-calendar --with-curl \
+--disable-rpath --enable-inline-optimization --with-bz2 --with-zlib \
+--enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl \
+--enable-mbregex --enable-exif --enable-bcmath --with-mhash \
+--with-pdo-mysql=mysqlnd --with-mysqli=mysqlnd --with-openssl --with-fpm-user=xtreamcodes \
+--with-fpm-group=xtreamcodes --with-libdir=/lib/x86_64-linux-gnu \
+--with-gettext --with-xmlrpc --with-xsl --enable-opcache \
+--enable-fpm --enable-static --disable-shared --enable-gd-jis-conv
 make -j$(nproc --all)
 killall php
 killall php-fpm
@@ -235,7 +228,7 @@ kill $(ps aux | grep 'xtreamcodes' | grep -v grep | grep -v 'start_services.sh' 
 rm -rf /home/xtreamcodes/iptv_xtream_codes/php/lib/php/extensions/
 make install
 if [ ! -f "/home/xtreamcodes/iptv_xtream_codes/php/bin/php" ]; then
-    tput setaf 1 ; tput bold ;echo "php build error"; tput sgr0;    
+    tput setaf 1 ; tput bold ;echo "php build error"; tput sgr0;
 echo ""	
     exit 0
 fi
@@ -248,7 +241,7 @@ cd /root/phpbuild/mcrypt-1.0.5
 make -j$(nproc --all)
 make install
 if [ ! -f "/home/xtreamcodes/iptv_xtream_codes/php/lib/php/extensions/no-debug-non-zts-20190902/mcrypt.so" ]; then
-    tput setaf 1 ; tput bold ;echo "php-mcrypt build error"; tput sgr0;    
+    tput setaf 1 ; tput bold ;echo "php-mcrypt build error"; tput sgr0;
 echo ""	
     exit 0
 fi
@@ -261,7 +254,7 @@ cd /root/phpbuild/geoip-1.1.1
 make -j$(nproc --all)
 make install
 if [ ! -f "/home/xtreamcodes/iptv_xtream_codes/php/lib/php/extensions/no-debug-non-zts-20190902/geoip.so" ]; then
-    tput setaf 1 ; tput bold ;echo "php-mcrypt build error"; tput sgr0;    
+    tput setaf 1 ; tput bold ;echo "php-mcrypt build error"; tput sgr0;
 echo ""	
     exit 0
 fi
@@ -285,7 +278,7 @@ cd /root
 rm -rf /root/phpbuild/
 mkdir -p /home/xtreamcodes/iptv_xtream_codes/bin/
 cd /home/xtreamcodes/iptv_xtream_codes/bin/
-wget https://bitbucket.org/emre1393/xtreamui_mirror/downloads/ffmpeg_v5.0.1_amd64.zip -O /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg_v5.0.1_amd64.zip
+wget https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/ffmpeg_v5.0.1_amd64.zip -O /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg_v5.0.1_amd64.zip
 rm -f /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg
 rm -f /home/xtreamcodes/iptv_xtream_codes/bin/ffprobe
 unzip /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg_v5.0.1_amd64.zip
@@ -309,12 +302,10 @@ sudo chown -R xtreamcodes:xtreamcodes /home/xtreamcodes/
 sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/permissions.sh
 sudo /home/xtreamcodes/iptv_xtream_codes/permissions.sh
 sudo find /home/xtreamcodes/ -type d -not \( -name .update -prune \) -exec chmod -R 777 {} +
-sudo wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/ubuntu/start_services.sh -O /home/xtreamcodes/iptv_xtream_codes/start_services.sh
+sudo wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 /home/xtreamcodes/iptv_xtream_codes/permissions.sh
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 sudo bash -c "echo 1 > /home/xtreamcodes/iptv_xtream_codes/php-7.4.33"
 fi
     tput setaf 2 ; tput bold ;echo "finish"; tput sgr0;
-
-
