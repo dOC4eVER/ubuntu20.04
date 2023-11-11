@@ -25,6 +25,12 @@
 # Debian 10/11
 # 64bit online system
 #
+#--- Set custom logging methods so we create a log file in the current working directory.
+logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
+touch "$logfile"
+exec > >(tee "$logfile")
+exec 2>&1
+
 while getopts ":t:c:i:l:m:h:" option; do
     case "${option}" in
         t)
@@ -248,6 +254,34 @@ spinner()
     done
     printf "    \b\b\b\b"
 }
+if [[ "$tz" == "" ]] ; then
+    # Propose selection list for the time zone
+echo ""
+    tput setaf 5 ;tput blink;tput cuf 5; tput bold ;echo "Preparing to select timezone, please wait a few seconds..."; tput sgr0;
+echo " "
+    sleep 10
+# sleep 30	old value
+    $PACKAGE_INSTALLER tzdata
+    # setup server timezone
+    if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
+        # make tzselect to save TZ in /etc/timezone
+    tput setaf 5 ; tput bold ;echo "echo "echo \$TZ > /etc/timezone" >> /usr/bin/tzselect"; tput sgr0;
+echo ""
+        tzselect
+        tz=$(cat /etc/timezone)
+	rm -f /etc/localtime
+	ln -s /usr/share/zoneinfo/$tz /etc/localtime
+	timedatectl set-timezone $tz
+    elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
+        DEBIAN_FRONTEND=dialog dpkg-reconfigure tzdata
+		DEBIAN_FRONTEND=noninteractive
+		export DEBIAN_FRONTEND=noninteractive
+        tz=$(cat /etc/timezone)
+	rm -f /etc/localtime
+	ln -s /usr/share/zoneinfo/$tz /etc/localtime
+	timedatectl set-timezone $tz
+    fi
+else
 echo "time zone set $tz"
 echo $tz > /etc/timezone
 rm -f /etc/localtime
