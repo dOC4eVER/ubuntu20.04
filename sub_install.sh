@@ -26,10 +26,10 @@
 # 64bit online system
 #
 #--- Set custom logging methods so we create a log file in the current working directory.
-logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
-touch "$logfile"
-exec > >(tee "$logfile")
-exec 2>&1
+#logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
+#touch "$logfile"
+#exec > >(tee "$logfile")
+#exec 2>&1
 
 while getopts ":t:c:i:l:m:h:" option; do
     case "${option}" in
