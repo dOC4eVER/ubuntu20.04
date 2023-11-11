@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+
 # Official Xtream UI Automated Installation Script
 # =============================================
 # Beta Version dot not use in production
