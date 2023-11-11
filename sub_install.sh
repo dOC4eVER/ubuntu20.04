@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 # Official Xtream UI Automated Installation Script
 # =============================================
 # Beta Version dot not use in production
@@ -25,12 +25,6 @@
 # Debian 10/11
 # 64bit online system
 #
-#--- Set custom logging methods so we create a log file in the current working directory.
-#logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
-#touch "$logfile"
-#exec > >(tee "$logfile")
-#exec 2>&1
-
 while getopts ":t:c:i:l:m:h:" option; do
     case "${option}" in
         t)
@@ -50,8 +44,8 @@ while getopts ":t:c:i:l:m:h:" option; do
             ;;
         h)
             echo "help usage"
-			echo "curl -L https://github.com/dOC4eVER/ubuntu20.04/raw/master/install.sh | sudo bash -s -- -a adminusername -t timezone -p adminpassord -o adminaccesport -c clientaccesport -r apacheport -e email -m mysqlpassword -s yes"
-			echo "./install.sh -a adminusername -t timezone -p adminpassord -o adminaccesport -c clientaccesport -r apacheport -e email -m mysqlpassword -s yes"
+			echo "curl -L https://github.com/amidevous/xtream-ui-ubuntu20.04/raw/master/install.sh | sudo bash -s -- -a adminusername -t timezone -p adminpassord -o adminaccesport -c clientaccesport -r apacheport -e email -m mysqlpassword -s yes"
+			echo "./install.sh -a adminusernamesername -t timezone -p adminpassord -o adminaccesport -c clientaccesport -r apacheport -e email -m mysqlpassword -s yes"
 			echo "option -t for set Time Zone"
 			echo "option -a Enter Your Desired Admin Login Access"
 			echo "option -p Enter Your Desired Admin Password Access"
@@ -62,39 +56,26 @@ while getopts ":t:c:i:l:m:h:" option; do
 			echo "option -m Enter Your Desired MYSQL Password"
 			echo "option -s for silent use yes option for remove confirm install"
 			echo "option -h for write this help"
-			echo "full exemple"
-			echo "curl -L https://github.com/dOC4eVER/ubuntu20.04/raw/master/install.sh | bash -s -- -a admin -t Europe/Paris -p admin -o 25500 -c 80 -r 8080 -e admin@example.com -m mysqlpassword -s yes"
-			echo "./install.sh -a admin -t Europe/Paris -p admin -o 25500 -c 80 -r 8080 -e admin@example.com -m mysqlpassword -s yes"
+			echo "full exeple"
+			echo "curl -L https://github.com/amidevous/xtream-ui-ubuntu20.04/raw/master/install.sh | bash -s -- -a admin -t Europe/Paris -p admin -o 25500 -c 80 -r 8080 -e amidevous@example.com -m mysqlpassword -s yes"
+			echo "./install.sh -a admin -t Europe/Paris -p admin -o 25500 -c 80 -r 8080 -e amidevous@example.com -m mysqlpassword -s yes"
 			exit
             ;;
         *)
-    tput setaf 4 ;tput cuf 5;tput bold ;echo "require use parameter"; tput sgr0;
-echo ""
+      echo "require use parameter"
       exit 0
             ;;
     esac
 done
-#clear
-XC_VERSION="41 dOC4eVER v01"
+clear
+XC_VERSION="22 CK 41"
 PANEL_PATH="/home/xtreamcodes/iptv_xtream_codes"
 #--- Display the 'welcome' splash/user warning info..
-#test ok
 echo ""
-    tput setaf 2 ; tput bold ;echo " ┌───────────────────────────────────────────────────────────────────┐"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " │    Welcome to the Official Xtream UI Installer $XC_VERSION    │"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
-echo ""
-    tput setaf 3 ;tput blink; tput bold ;tput cuf 20;echo "Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
-echo ""
-    tput setaf 1 ; tput bold ; tput cuf 5; echo "Supported Operating Systems:"; tput sgr0;
-    tput setaf 2 ; tput bold ; tput cuf 5; echo "Ubuntu server 18.04/20.04/22.04"; tput sgr0;
-    tput setaf 3 ; tput bold ; tput cuf 5; echo "CentOS 7.*"; tput sgr0;
-    tput setaf 4 ; tput bold ; tput cuf 5; echo "CentOS Stream 8.*"; tput sgr0;
-    tput setaf 5 ; tput bold ; tput cuf 5; echo "Fedora 34/35/36"; tput sgr0;
-    tput setaf 6 ; tput bold ; tput cuf 5; echo "Debian 10/11 "; tput sgr0;
-    tput setaf 7 ; tput bold ; tput cuf 5; echo "64bit online system "; tput sgr0;
+echo "#############################################################"
+echo "#  Welcome to the Official Xtream UI Installer $XC_VERSION  #"
+echo "#############################################################"
 echo -e "\nChecking that minimal requirements are ok"
-echo ""
 # Ensure the OS is compatible with the launcher
 if [ -f /etc/centos-release ]; then
     inst() {
@@ -126,10 +107,8 @@ elif [ -f /etc/os-release ]; then
 fi
 ARCH=$(uname -m)
 if [[ "$VER" = "8" && "$OS" = "CentOs" ]]; then
-    tput setaf 3 ; tput cuf 5; tput bold ;echo "Centos 8 obsolete udate to CentOS-Stream 8"; tput sgr0;
-echo " "	
-    tput setaf 1 ; tput cuf 5; tput bold ;echo "this operation may take some time"; tput sgr0;
-echo " "	
+	echo "Centos 8 obsolete udate to Centos Stream 8"
+	echo "this operation may take some time"
 	sleep 60
 	# change repository to use vault.centos.org CentOS 8 found online to vault.centos.org
 	find /etc/yum.repos.d -name '*.repo' -exec sed -i 's|mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|' {} \;
@@ -151,36 +130,27 @@ echo " "
 	find / -name '*.rpmsave' -exec rm -f {} \;
 	OS="Centos Stream"
 	fi
-    tput setaf 3 ; tput cuf 5; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;
-echo ""	
+echo "Detected : $OS  $VER  $ARCH"
 if [[ "$OS" = "Ubuntu" && ("$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.04" ) && "$ARCH" == "x86_64" ||
 "$OS" = "debian" && ("$VER" = "10" || "$VER" = "11" ) && "$ARCH" == "x86_64" ||
 "$OS" = "CentOs" && ("$VER" = "6" || "$VER" = "7" || "$VER" = "8" ) && "$ARCH" == "x86_64" ||
 "$OS" = "Centos Stream" && "$VER" = "8" && "$ARCH" == "x86_64" ||
-"$OS" = "Fedora" && ("$VER" = "36" || "$VER" = "37" || "$VER" = "38" ) && "$ARCH" == "x86_64" ]] ; then
-    tput setaf 2 ; tput cuf 5; tput bold ;echo "Ok."; tput sgr0;    
-#
+"$OS" = "Fedora" && ("$VER" = "34" || "$VER" = "35" || "$VER" = "36" ) && "$ARCH" == "x86_64" ]] ; then
+    echo "Ok."
 else
-    tput setaf 1 ; tput cuf 5; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;
-echo " "
+    echo "Sorry, this OS is not supported by Xtream UI."
     exit 1
 fi
 # Check if the user is 'root' before allowing installation to commence
 if [ $UID -ne 0 ]; then
-    tput setaf 4 ; tput cuf 5; tput bold ;echo "Install failed: you must be logged in as 'root' to install."; tput sgr0;
-echo ""
-    tput setaf 4 ; tput cuf 5; tput bold ;echo "Use command 'sudo -i', then enter root password and then try again."; tput sgr0;
-echo ""
+    echo "Install failed: you must be logged in as 'root' to install."
+    echo "Use command 'sudo -i', then enter root password and then try again."
     exit 1
 fi
-if [ -e /usr/local/cpanel ] || [ -e /usr/local/directadmin ] || [ -e /usr/local/solusvm/www ] || [ -e /usr/local/home/admispconfig ] || [ -e /usr/local/lxlabs/kloxo ] || [ -e /home/zpanel ] || [ -e /home/sentora ] ; then
-echo ""
-    tput setaf 4 ; tput cuf 5; tput bold ;echo "It appears that a control panel is already installed on your server; This installer"; tput sgr0;
-echo ""
-    tput setaf 4 ; tput cuf 5; tput bold ;echo "is designed to install and configure Sentora on a clean OS installation only."; tput sgr0;
-echo ""
-    tput setaf 4 ; tput cuf 5; tput bold ;echo -e "\nPlease re-install your OS before attempting to install using this script."; tput sgr0;
-echo ""
+if [ -e /usr/local/cpanel ] || [ -e /usr/local/directadmin ] || [ -e /usr/local/solusvm/www ] || [ -e /usr/local/home/admispconfig ] || [ -e /usr/local/lxlabs/kloxo ] ; then
+    echo "It appears that a control panel is already installed on your server; This installer"
+    echo "is designed to install and configure Sentora on a clean OS installation only."
+    echo -e "\nPlease re-install your OS before attempting to install using this script."
     exit 1
 fi
 if [[ "$OS" = "CentOs" ]] ; then
@@ -208,12 +178,11 @@ elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 fi
 #--- Prepare or query informations required to install
 # Update repositories and Install wget and util used to grab server IP
-    tput setaf 6 ; tput cuf 5; tput bold ;echo -e "\n-- Installing wget and dns utils required to manage inputs"; tput sgr0;
-echo ""
+echo -e "\n-- Installing wget and dns utils required to manage inputs"
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
 	$PACKAGE_INSTALLER $PACKAGE_UTILS
 	$PACKAGE_INSTALLER crontabs
-    $PACKAGE_UPDATER
+  $PACKAGE_UPDATER
         $PACKAGE_INSTALLER bind-utils perl
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 	DEBIAN_FRONTEND=noninteractive
@@ -254,57 +223,23 @@ spinner()
     done
     printf "    \b\b\b\b"
 }
-if [[ "$tz" == "" ]] ; then
-    # Propose selection list for the time zone
-echo ""
-    tput setaf 5 ;tput blink;tput cuf 5; tput bold ;echo "Preparing to select timezone, please wait a few seconds..."; tput sgr0;
-echo " "
-    sleep 10
-# sleep 30	old value
-    $PACKAGE_INSTALLER tzdata
-    # setup server timezone
-    if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
-        # make tzselect to save TZ in /etc/timezone
-    tput setaf 5 ; tput bold ;echo "echo "echo \$TZ > /etc/timezone" >> /usr/bin/tzselect"; tput sgr0;
-echo ""
-        tzselect
-        tz=$(cat /etc/timezone)
-	rm -f /etc/localtime
-	ln -s /usr/share/zoneinfo/$tz /etc/localtime
-	timedatectl set-timezone $tz
-    elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
-        DEBIAN_FRONTEND=dialog dpkg-reconfigure tzdata
-		DEBIAN_FRONTEND=noninteractive
-		export DEBIAN_FRONTEND=noninteractive
-        tz=$(cat /etc/timezone)
-	rm -f /etc/localtime
-	ln -s /usr/share/zoneinfo/$tz /etc/localtime
-	timedatectl set-timezone $tz
-    fi
-else
 echo "time zone set $tz"
 echo $tz > /etc/timezone
 rm -f /etc/localtime
 ln -s /usr/share/zoneinfo/$tz /etc/localtime
 timedatectl set-timezone $tz
 PORTSSH=22
-sleep 30
-#clear
+clear
 # ***************************************
 # Installation really starts here
-echo " "
-    tput setaf 1 ;tput blink; tput bold ;tput cuf 20;echo "Installation really starts here" yn; tput sgr0;
-echo " "
+
 #--- Set custom logging methods so we create a log file in the current working directory.
 logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
 touch "$logfile"
 exec > >(tee "$logfile")
 exec 2>&1
- echo " "
-   tput setaf 2 ; tput cuf 5; tput bold ;echo "Installing Load Balancer"; tput sgr0;
- echo " "
-   tput setaf 3 ; tput cuf 5; tput bold ;echo "at http://$ipaddr:$ACCESPORT on server under: $OS $VER $ARCH"; tput sgr0;
-echo " "
+echo "Installing Xtream UI $XC_VERSION at http://$ipaddr:$ACCESPORT"
+echo "on server under: $OS  $VER  $ARCH"
 uname -a
 # Function to disable a file by appending its name with _disabled
 disable_file() {
@@ -510,18 +445,14 @@ EOF
 	apt-get update
 fi
 #--- List all already installed packages (may help to debug)
-echo " "
-    tput setaf 4 ; tput cuf 5; tput bold ;echo -e "\n-- Listing of all packages installed:"; tput sgr0;
-echo " "
+echo -e "\n-- Listing of all packages installed:"
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
     rpm -qa | sort
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
     dpkg --get-selections
 fi
 	#--- Ensures that all packages are up to date
-echo " "
-    tput setaf 1 ; tput cuf 5; tput bold ;echo -e "\n-- Updating+upgrading system, it may take some time..."; tput sgr0;    
-echo " "	
+echo -e "\n-- Updating+upgrading system, it may take some time..."
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" ]]; then
     $PACKAGE_UPDATER
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
@@ -532,9 +463,7 @@ if [[ "$OS" = "Ubuntu" ]]; then
     apt-get purge libcurl3 -y
 fi
 #--- Install utility packages required by the installer and/or Sentora.
-echo " "
-    tput setaf 1 ; tput cuf 5; tput bold ;echo -e "\n-- Downloading and installing required tools..."; tput sgr0;    
-echo " "	
+echo -e "\n-- Downloading and installing required tools..."
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
     $PACKAGE_INSTALLER sudo vim make zip unzip chkconfig bash-completion
     if  [[ "$VER" = "7" ]]; then
@@ -736,15 +665,11 @@ EOF
   echo "not require"
 	fi
 $PACKAGE_INSTALLER daemonize
-echo " "
-    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of Packages Done"; tput sgr0;
-echo " "
+echo -e "\\r${CHECK_MARK} Installation Of Packages Done"
 sleep 1s
-    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Installation Of Load Balancer..."; tput sgr0;
-echo " "
+echo -n "[+] Installation Of XtreamCodes..."
 sleep 1s
-#### Installation Of Load Balancer
-echo " "
+#### installation de xtream codes
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 adduser --system --shell /bin/false --group --disabled-login xtreamcodes
 else
@@ -752,13 +677,11 @@ adduser --system --shell /bin/false xtreamcodes
 mkdir -p /home/xtreamcodes
 fi
 OSNAME=$(echo $OS | sed  "s| |.|g" )
-wget -q -O /tmp/xtreamcodes.tar.gz https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/sub_xui_"$OSNAME"_"$VER".tar.gz
+wget -q -O /tmp/xtreamcodes.tar.gz https://github.com/amidevous/xtream-ui-ubuntu20.04/releases/download/start/sub_xui_"$OSNAME"_"$VER".tar.gz
 tar -xf "/tmp/xtreamcodes.tar.gz" -C "/home/xtreamcodes/"
 rm -r /tmp/xtreamcodes.tar.gz
-    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of XtreamCodes Done"; tput sgr0;
-echo " "
-    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Configuration Of Mysql & Nginx..."; tput sgr0;    
-echo " "
+echo -e "\\r${CHECK_MARK} Installation Of XtreamCodes Done"
+echo -n "[+] Configuration Of Mysql & Nginx..."
 #### config database
 ## add python script
 python2 << END
@@ -794,23 +717,18 @@ def encrypt(rHost="127.0.0.1", rUsername="user_iptvpro", rPassword="", rDatabase
     rf.close()
 encrypt(rHost, rUsername, rPassword, rDatabase, rServerID, rPort)
 END
-    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Mysql & Nginx Done"; tput sgr0;
-echo " "
-    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Configuration Of Crons & Autorisations..."; tput sgr0;    
-echo " "
+echo -e "\\r${CHECK_MARK} Configuration Of Mysql & Nginx Done"
+echo -n "[+] Configuration Of Crons & Autorisations..."
 rm -r /home/xtreamcodes/iptv_xtream_codes/database.sql
 if ! grep -q "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" /etc/sudoers; then
-    tput setaf 3 ; tput cuf 5; tput bold ;echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers; tput sgr0;    
-echo " "
+    echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers;
 fi
 ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" /etc/fstab; then
-    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" >> /etc/fstab; tput sgr0;    
-	
+	echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" >> /etc/fstab;
 fi
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" /etc/fstab; then
-    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab; tput sgr0;
-
+	echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab;
 fi
 chmod -R 0777 /home/xtreamcodes
 cat > /home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf <<EOR
@@ -912,13 +830,10 @@ EOR
 sed -i "s|;date.timezone =|date.timezone = $timezone|g" /home/xtreamcodes/iptv_xtream_codes/php/lib/php.ini
 #replace python by python2
 #local and security patching settings and admin_settings
-echo " "
-    tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Of Crons & Autorisations Done"; tput sgr0;
-echo " "
-    tput setaf 4 ; tput bold ;echo -n "[+] Old CK41 to dOC4eVER v01 Installation Of Admin Web Access..."; tput sgr0;    
-echo " "
+echo -e "\\r${CHECK_MARK} Configuration Of Crons & Autorisations Done"
+echo -n "[+] installation Of Admin Web Access..."
 chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
-wget -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/GeoLite2.mmdb
+wget -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb http://xcodes.mine.nu/XCodes/GeoLite2.mmdb
 chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
 chown xtreamcodes:xtreamcodes -R /home/xtreamcodes
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
@@ -930,41 +845,37 @@ echo "@reboot root sudo /home/xtreamcodes/iptv_xtream_codes/start_services.sh" >
 killall php-fpm
 rm -f /home/xtreamcodes/iptv_xtream_codes/php/VaiIb8.pid /home/xtreamcodes/iptv_xtream_codes/php/JdlJXm.pid /home/xtreamcodes/iptv_xtream_codes/php/CWcfSP.pid
 rm -f /home/xtreamcodes/iptv_xtream_codes/start_services.sh
-wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /home/xtreamcodes/iptv_xtream_codes/start_services.sh
+wget https://github.com/amidevous/xtream-ui-ubuntu20.04/raw/master/start_services.sh -O /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
-echo " "
-    tput setaf 3 ; tput cuf 5; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
-echo " "
-    tput setaf 1 ; tput cuf 5; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
-echo " "
-sleep 10
-#sleep 60 ancienne valeur(dOC4eVER)
+echo "CentOS or Fedora Require nginx rebuild"
+echo "please wait this operation can be long"
+sleep 60
 $PACKAGE_INSTALLER libaio-devel libmaxminddb-devel
 cd /tmp/
-sudo wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1w.tar.gz
-tar -xzvf OpenSSL_1_1_1w.tar.gz
+sudo wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1h.tar.gz
+tar -xzvf OpenSSL_1_1_1h.tar.gz
 cd /root
-wget http://nginx.org/download/nginx-1.24.0.tar.gz
-tar -xzvf nginx-1.24.0.tar.gz
+wget http://nginx.org/download/nginx-1.19.5.tar.gz
+tar -xzvf nginx-1.19.5.tar.gz
 git clone https://github.com/leev/ngx_http_geoip2_module.git
-cd nginx-1.24.0
-./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp --http-fastcgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/fastcgi_temp --lock-path=/home/xtreamcodes/iptv_xtream_codes/tmp/nginx.lock --http-uwsgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/uwsgi_temp --http-scgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/scgi_temp --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx/nginx.pid --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_v2_module --with-pcre --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-mail --with-mail_ssl_module --with-file-aio --with-cpu-opt=generic --add-module=/root/ngx_http_geoip2_module --with-openssl=/tmp/openssl-OpenSSL_1_1_1w
+cd nginx-1.19.5
+./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx/ --http-client-body-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/client_temp --http-proxy-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/proxy_temp --http-fastcgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/fastcgi_temp --lock-path=/home/xtreamcodes/iptv_xtream_codes/tmp/nginx.lock --http-uwsgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/uwsgi_temp --http-scgi-temp-path=/home/xtreamcodes/iptv_xtream_codes/tmp/scgi_temp --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx/nginx.pid --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_v2_module --with-pcre --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-mail --with-mail_ssl_module --with-file-aio --with-cpu-opt=generic --add-module=/root/ngx_http_geoip2_module --with-openssl=/tmp/openssl-OpenSSL_1_1_1h
 make
 rm -f /home/xtreamcodes/iptv_xtream_codes/nginx/sbin/nginx
 cp objs/nginx /home/xtreamcodes/iptv_xtream_codes/nginx/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx/sbin/nginx
 cd /tmp/
-rm -rf openssl-OpenSSL_1_1_1w
-tar -xzvf OpenSSL_1_1_1w.tar.gz
+rm -rf openssl-OpenSSL_1_1_1h
+tar -xzvf OpenSSL_1_1_1h.tar.gz
 cd /root
-rm -rf nginx-1.24.0 ngx_http_geoip2_module
-tar -xzvf nginx-1.24.0.tar.gz
+rm -rf nginx-1.19.5 ngx_http_geoip2_module
+tar -xzvf nginx-1.19.5.tar.gz
 git clone https://github.com/leev/ngx_http_geoip2_module.git
-wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.2.zip
-unzip v1.2.2.zip
-cd nginx-1.24.0
-./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/ --lock-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx_rtmp.lock --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx.pid --add-module=/root/nginx-rtmp-module-1.2.1 --with-pcre --without-http_rewrite_module --with-file-aio --with-cpu-opt=generic --with-openssl=/tmp/openssl-OpenSSL_1_1_1w --add-module=/root/ngx_http_geoip2_module --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
+wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.1.zip
+unzip v1.2.1.zip
+cd nginx-1.19.5
+./configure --prefix=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/ --lock-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx_rtmp.lock --conf-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf --error-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_error.log --http-log-path=/home/xtreamcodes/iptv_xtream_codes/logs/rtmp_access.log --pid-path=/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/nginx.pid --add-module=/root/nginx-rtmp-module-1.2.1 --with-pcre --without-http_rewrite_module --with-file-aio --with-cpu-opt=generic --with-openssl=/tmp/openssl-OpenSSL_1_1_1h --add-module=/root/ngx_http_geoip2_module --with-http_ssl_module --with-cc-opt="-Wimplicit-fallthrough=0"
 make
 cd objs
 mv nginx nginx_rtmp
@@ -972,13 +883,12 @@ rm -f /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
 cp nginx_rtmp /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
 cd /root
-rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip nginx-rtmp-module-1.2.2 ngx_http_geoip2_module nginx-1.24.0.tar.gz
+rm -rf /tmp/OpenSSL_1_1_1h /tmp/openssl-OpenSSL_1_1_1h nginx-1.19.5 v1.2.1.zip nginx-rtmp-module-1.2.1 ngx_http_geoip2_module nginx-1.19.5.tar.gz
 fi
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
+echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"
 echo " "
-    tput setaf 3 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
-echo " "
-echo " ─────────────────────────────────────────────────────────────────── "
-echo " │[R]        Old CK41 to dOC4eVER Sub Installed successfully       │ "
-echo " ─────────────────────────────────────────────────────────────────── "
+echo " ┌────────────────────────────────────────────┐ "
+echo " │[R]        XtreamCodes Is Ready...          │ "
+echo " └────────────────────────────────────────────┘ "
