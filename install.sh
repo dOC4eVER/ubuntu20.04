@@ -319,25 +319,25 @@ echo " "
 if [[ "$ACCESPORT" == "" ]] ; then
     tput setaf 3 ; tput bold ;read -p "...... Enter Your Desired Admin Port Access: " ACCESPORT; tput sgr0;
 else
-    tput setaf 3 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
+    tput setaf 3 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT"; tput sgr0;
 fi
 echo " "
 if [[ "$CLIENTACCESPORT" == "" ]] ; then
     tput setaf 4 ; tput bold ;read -p"...... Enter Your Desired Client Port Access: " CLIENTACCESPORT; tput sgr0;
 else
-    tput setaf 4 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
+    tput setaf 4 ; tput bold ;echo "Desired Client Port Access set $CLIENTACCESPORT"; tput sgr0;
 fi
 echo " "
 if [[ "$APACHEACCESPORT" == "" ]] ; then
     tput setaf 5 ; tput bold ;read -p "...... Enter Your Desired Apache Port Access: " APACHEACCESPORT; tput sgr0;
 echo " "
 else
-    tput setaf 5 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT" ACCESPORT; tput sgr0;
+    tput setaf 5 ; tput bold ;echo "Desired Apache Port Acces set $APACHEACCESPORT"; tput sgr0;
 fi
 if [[ "$EMAIL" == "" ]] ; then
     tput setaf 6 ; tput bold ;read -p "...... Enter Your Email Addres: " EMAIL; tput sgr0;
 else
-    tput setaf 6 ; tput bold ;echo "Your Email Addres set $EMAIL"; tput sgr0;
+    tput setaf 6 ; tput bold ;echo "Desired Your Email Addres set $EMAIL"; tput sgr0;
 fi
 echo " "
 if [[ "$PASSMYSQL" == "" ]] ; then
