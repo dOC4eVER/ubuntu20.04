@@ -6,12 +6,14 @@ else
   chmod +x /etc/ensureos.sh
   source /etc/ensureos.sh
 fi
-echo "Detected : $OS  $VER  $ARCH"
+    echo -e " \033[1;33m Detected\033[1;36m $OS\033[1;32m $VER\033[0m" "\033[1;35m$ARCH\033[0m"
+echo ""	
 if [[ "$OS" = "Ubuntu" && ("$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.04" ) && "$ARCH" == "x86_64" ||
 "$OS" = "debian" && ("$VER" = "10" || "$VER" = "11" ) && "$ARCH" == "x86_64" ]] ; then
     echo "Ok."
 else
-    echo "Sorry, this OS is not supported by Xtream UI."
+    tput setaf 1 ; tput bold ;echo "Sorry, this OS is not supported by Xtream UI."; tput sgr0;
+echo " "	
     exit 1
 fi
 cd /root

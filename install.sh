@@ -24,7 +24,12 @@
 # Fedora 34/35/36
 # Debian 10/11
 # 64bit online system
-#
+### fixed by dOC4eVER 2023
+#--- Set custom logging methods so we create a log file in the current working directory.
+logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
+touch "$logfile"
+exec > >(tee "$logfile")
+exec 2>&1
 while getopts ":t:a:p:o:c:r:e:m:s:h:" option; do
     case "${option}" in
         t)
@@ -87,24 +92,24 @@ while getopts ":t:a:p:o:c:r:e:m:s:h:" option; do
     esac
 done
 #clear
-XC_VERSION="41 dOC4eVER v01"
+XC_VERSION="CK41-> dOC4eVER v03"
 PANEL_PATH="/home/xtreamcodes/iptv_xtream_codes"
 #--- Display the 'welcome' splash/user warning info..
 #test ok
 echo ""
     tput setaf 2 ; tput bold ;echo " ┌───────────────────────────────────────────────────────────────────┐"; tput sgr0;
-    tput setaf 2 ; tput bold ;echo " │    Welcome to the Official Xtream UI Installer $XC_VERSION    │"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │  Welcome to the Official Xtream UI Installer $XC_VERSION  │"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " └───────────────────────────────────────────────────────────────────┘"; tput sgr0;
 echo ""
-    tput setaf 3 ;tput blink; tput bold ;tput cuf 20;echo "Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
+    tput setaf 3 ; tput bold ;tput cuf 20;echo "Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
 echo ""
-    tput setaf 1 ; tput bold ;tput cuf 5;echo "Supported Operating Systems:"; tput sgr0;
-    tput setaf 2 ; tput bold ;tput cuf 5;echo "Ubuntu server 18.04/20.04/22.04"; tput sgr0;
-    tput setaf 3 ; tput bold ;tput cuf 5;echo "CentOS 7.*"; tput sgr0;
-    tput setaf 4 ; tput bold ;tput cuf 5;echo "CentOS Stream 8.*"; tput sgr0;
-    tput setaf 5 ; tput bold ;tput cuf 5;echo "Fedora 34/35/36"; tput sgr0;
-    tput setaf 6 ; tput bold ;tput cuf 5;echo "Debian 10/11 "; tput sgr0;
-    tput setaf 7 ; tput bold ;tput cuf 5;echo "64bit online system "; tput sgr0;
+    tput setaf 1 ; tput bold ; tput cuf 5; echo "Supported Operating Systems:"; tput sgr0;
+    tput setaf 2 ; tput bold ; tput cuf 5; echo "Ubuntu server 18.04/20.04/22.04"; tput sgr0;
+    tput setaf 3 ; tput bold ; tput cuf 5; echo "CentOS 7.*"; tput sgr0;
+    tput setaf 4 ; tput bold ; tput cuf 5; echo "CentOS Stream 8.*"; tput sgr0;
+    tput setaf 5 ; tput bold ; tput cuf 5; echo "Fedora 34/35/36"; tput sgr0;
+    tput setaf 6 ; tput bold ; tput cuf 5; echo "Debian 10/11 "; tput sgr0;
+    tput setaf 7 ; tput bold ; tput cuf 5; echo "64bit online system "; tput sgr0;
 echo -e "\nChecking that minimal requirements are ok"
 echo ""
 # Ensure the OS is compatible with the launcher
@@ -165,7 +170,7 @@ echo " "
 	find / -name '*.rpmsave' -exec rm -f {} \;
 	OS="Centos Stream"
 	fi
-    tput setaf 3 ; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;
+    echo -e " \033[1;33m Detected\033[1;36m $OS\033[1;32m $VER\033[0m" "\033[1;35m$ARCH\033[0m"
 echo ""	
 if [[ "$OS" = "Ubuntu" && ("$VER" = "18.04" || "$VER" = "20.04" || "$VER" = "22.04" ) && "$ARCH" == "x86_64" ||
 "$OS" = "debian" && ("$VER" = "10" || "$VER" = "11" ) && "$ARCH" == "x86_64" ||
@@ -275,12 +280,13 @@ if [[ "$tz" == "" ]] ; then
 echo ""
     tput setaf 5 ;tput blink;tput cuf 5; tput bold ;echo "Preparing to select timezone, please wait a few seconds..."; tput sgr0;
 echo " "
-    sleep 30
+    sleep 10
+# sleep 30	old value
     $PACKAGE_INSTALLER tzdata
     # setup server timezone
     if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
         # make tzselect to save TZ in /etc/timezone
-    tput setaf 5 ; tput bold ;echo "echo "echo \$TZ > /etc/timezone" >> /usr/bin/tzselect"; tput sgr0;
+        echo "echo \$TZ > /etc/timezone" >> /usr/bin/tzselect
 echo ""
         tzselect
         tz=$(cat /etc/timezone)
@@ -304,47 +310,53 @@ else
 	timedatectl set-timezone $tz
 fi
 echo " "
+######################################################################
 if [[ "$adminL" == "" ]] ; then
     tput setaf 1 ; tput bold ;read -p "...... Enter Your Desired Admin Login Access: " adminL; tput sgr0;
 else
     tput setaf 1 ; tput bold ;echo "Desired Admin Login Access set $adminL"; tput sgr0;
 fi
 echo " "
+######################################################################
 if [[ "$adminP" == "" ]] ; then
     tput setaf 2 ; tput bold ;read -p "...... Enter Your Desired Admin Password Access: " adminP; tput sgr0;
 else
     tput setaf 2 ; tput bold ;echo "Desired Admin Password Access set $adminP"; tput sgr0;
 fi
 echo " "
+######################################################################
 if [[ "$ACCESPORT" == "" ]] ; then
     tput setaf 3 ; tput bold ;read -p "...... Enter Your Desired Admin Port Access: " ACCESPORT; tput sgr0;
 else
     tput setaf 3 ; tput bold ;echo "Desired Admin Port Access set $ACCESPORT"; tput sgr0;
 fi
 echo " "
+######################################################################
 if [[ "$CLIENTACCESPORT" == "" ]] ; then
     tput setaf 4 ; tput bold ;read -p"...... Enter Your Desired Client Port Access: " CLIENTACCESPORT; tput sgr0;
 else
     tput setaf 4 ; tput bold ;echo "Desired Client Port Access set $CLIENTACCESPORT"; tput sgr0;
 fi
 echo " "
+######################################################################
 if [[ "$APACHEACCESPORT" == "" ]] ; then
     tput setaf 5 ; tput bold ;read -p "...... Enter Your Desired Apache Port Access: " APACHEACCESPORT; tput sgr0;
-echo " "
 else
     tput setaf 5 ; tput bold ;echo "Desired Apache Port Acces set $APACHEACCESPORT"; tput sgr0;
 fi
+echo " "
+######################################################################
 if [[ "$EMAIL" == "" ]] ; then
     tput setaf 6 ; tput bold ;read -p "...... Enter Your Email Addres: " EMAIL; tput sgr0;
 else
     tput setaf 6 ; tput bold ;echo "Desired Your Email Addres set $EMAIL"; tput sgr0;
 fi
 echo " "
+######################################################################
 if [[ "$PASSMYSQL" == "" ]] ; then
     tput setaf 7 ; tput bold ;read -p "...... Enter Your Desired MYSQL Password: " PASSMYSQL; tput sgr0;
 else
-    tput setaf 7 ; tput bold ;echo "Desired MYSQL Password set $PASSMYSQL"; tput sgr0;
-fi
+    tput setaf 7 ; tput bold ;echo "Desired MYSQL Password set $PASSMYSQL"; tput sgr0;fi
 echo " . "
 PORTSSH=22
 echo " "
@@ -357,10 +369,12 @@ case $yn in
     [Nn]* ) exit;;
 esac
 fi
-#clear
+clear
 # ***************************************
 # Installation really starts here
-echo " "
+echo ""
+
+echo ""
     tput setaf 1 ;tput blink; tput bold ;tput cuf 20;echo "Installation really starts here" yn; tput sgr0;
 echo " "
 #--- Set custom logging methods so we create a log file in the current working directory.
@@ -368,10 +382,16 @@ logfile=$(date +%Y-%m-%d_%H.%M.%S_xtream_ui_install.log)
 touch "$logfile"
 exec > >(tee "$logfile")
 exec 2>&1
-    tput setaf 2 ;tput cuf 20; tput bold ;echo "Installing Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
+    tput setaf 3 ;tput cuf 15; tput bold ;echo "Installing Xtream UI ◄۞ $XC_VERSION ۞► "; tput sgr0;
+	echo ""
+## print infos on putty or openssh client
+#############################################################################################
+    echo -e "\033[1;32m ────────────────────\033[0m""\033[1;35m Installing the MAIN SERVER \033[0m""\033[1;32m────────────────────\033[0m"
+    echo -e "    \033[1;33m Installing the MAIN SERVER under\033[0m""\033[1;36m $OS\033[1;32m $VER\033[0m" "\033[1;35m$ARCH\033[0m"
+    echo -e "    \033[1;33m with the IP\033[0m": $ipaddr 
+    echo -e "\033[1;32m ──────────────────────────────────────────────────────────────────────\033[0m"   
 echo " "
-    tput setaf 3 ; tput bold ;echo "at http://$ipaddr:$ACCESPORT on server under: $OS $VER $ARCH"; tput sgr0;
-echo " "
+ # Function to disable a file by appending its name with _disabled
 uname -a
 # Function to disable a file by appending its name with _disabled
 disable_file() {
@@ -380,8 +400,9 @@ disable_file() {
 wget -qO- https://github.com/dOC4eVER/ubuntu20.04/raw/master/ubuntu/depbuild.sh | bash
 #--- List all already installed packages (may help to debug)
 echo " "
-    tput setaf 4 ; tput bold ;echo -e "\n-- Listing of all packages installed:"; tput sgr0;
+    tput setaf 4 ; tput cuf 5;  tput bold ;echo -e "\n-- Listing of all packages installed:"; tput sgr0;
 echo " "
+sudo apt install python3 -y;
 if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
     rpm -qa | sort
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
@@ -391,13 +412,13 @@ echo " "
 $PACKAGE_INSTALLER daemonize
 mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$PASSMYSQL'; flush privileges;"
 echo " "
-    tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of Packages Done"; tput sgr0;
+    tput setaf 2 ; tput cuf 5; tput bold ;echo -e "\\r${CHECK_MARK} Installation Of Packages Done"; tput sgr0;
 echo " "
 sleep 1s
-    tput setaf 4 ; tput bold ;echo -n "[+] Installation Of XtreamCodes..."; tput sgr0;
+#### installation de xtream codes								  
+    tput setaf 4 ; tput cuf 5; tput bold ;echo -n "[+] Installation Of Xtream Codes..."; tput sgr0;
 echo " "
 sleep 1s
-#### installation de xtream codes
 echo " "
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 adduser --system --shell /bin/false --group --disabled-login xtreamcodes
@@ -485,15 +506,14 @@ echo " "
 echo " "
 rm -r /home/xtreamcodes/iptv_xtream_codes/database.sql
 if ! grep -q "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" /etc/sudoers; then
-    tput setaf 3 ; tput bold ;echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers; tput sgr0;    
-echo " "
+echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python2, /usr/bin/python" >> /etc/sudoers;
 fi
 ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" /etc/fstab; then
-    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" >> /etc/fstab; tput sgr0;    
+echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0" >> /etc/fstab;    
 fi
 if ! grep -q "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" /etc/fstab; then
-    tput setaf 3 ; tput bold ;echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab; tput sgr0;
+echo "tmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0" >> /etc/fstab;
 fi
 chmod -R 0777 /home/xtreamcodes
 cat > /home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf <<EOR
@@ -674,9 +694,9 @@ wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /ho
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 #if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
 echo " "
-    tput setaf 3 ; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
+    tput setaf 3 ; tput cuf 5; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
 echo " "
-    tput setaf 1 ; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
+    tput setaf 1 ; tput cuf 5; tput blink; tput bold ;echo "please wait this operation can be long"; tput sgr0;
 echo " "
 sleep 10
 #sleep 60 ancienne valeur(dOC4eVER)
@@ -717,27 +737,38 @@ rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip n
 #fi
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
-    tput setaf 3 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
 echo " "
 echo " ┌───────────────────────────────────────────────────────────────────┐ "
 echo " │[R]        Old CK41 to dOC4eVER v01 Installed successfully         │ "
 echo " └───────────────────────────────────────────────────────────────────┘ "
 ############## info install /root/infoinstall.txt ###################
 ## print infos on putty or openssh client
+echo -e " \033[1;33m fixed by\033[0m""\033[1;32m dOC4eVER\033[1;36m $OS\033[1;32m $VER\033[0m" "\033[1;35m$ARCH\033[0m""\033[1;32m IP\033[0m": $ipaddr
+echo " "
     tput setaf 2 ; tput bold ;echo " ─────────────────  Saved In: /root/Xtreaminfo.txt  ────────────────"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 1 ; tput bold ;echo " │ USERNAME ->->->->->->->->->->: $adminL"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " │ PASSWORD ->->->->->->->->->->: $adminP"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 3 ; tput bold ;echo " │ ADMIN  ACCES PORT->->->->->->: $ACCESPORT"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 4 ; tput bold ;echo " │ CLIENT ACCES PORT->->->->->->: $CLIENTACCESPORT"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 5 ; tput bold ;echo " │ APACHE ACCES PORT->->->->->->: $APACHEACCESPORT"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 6 ; tput bold ;echo " │ EMAIL->->->->->->->->->->->->: $EMAIL"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 7 ; tput bold ;echo " │ MYSQL root PASS->->->->->->->: $PASSMYSQL"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 8 ; tput bold ;echo " │ MYSQL user_iptvpro PASS->->->: $XPASS"; tput sgr0;
+    tput setaf 2 ; tput bold ;echo " │"; tput sgr0;
     tput setaf 2 ; tput bold ;echo " ───────────────────────────────────────────────────────────────────"; tput sgr0;
 ######################################################################
 ## copy info to file text
 echo "
-┌──────────────────────────  INFO  ─────────────────────────────────
+┌────────────────────  INFO  ────────────────────┐
 │
 │ PANEL ACCESS: http://$ipaddr:$ACCESPORT
 │
@@ -754,6 +785,6 @@ echo "
 │ MYSQL root PASS: $PASSMYSQL
 │
 │ MYSQL user_iptvpro PASS: $XPASS
-│ 
-└───────────────────────────────────────────────────────────────────
+│                                     ### fixed by dOC4eVER/2023
+└────────────────────────────────────────────────┘
 " >> /root/Xtreaminfo.txt

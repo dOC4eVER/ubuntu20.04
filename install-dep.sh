@@ -61,7 +61,8 @@ echo " "
 	mkdir -p /etc/yum.repos.d/
 
 
-echo "Detected : $OS  $VER  $ARCH"
+    echo -e " \033[1;33m Detected\033[0m""\033[1;36m $OS\033[1;32m $VER\033[0m" "\033[1;35m$ARCH\033[0m"
+echo ""
 if [[ "$OS" = "CentOs" && "$VER" = "6" && "$ARCH" == "x86_64" ||
 "$OS" = "CentOs" && "$VER" = "7" && "$ARCH" == "x86_64" ||
 "$OS" = "CentOs-Stream" && "$VER" = "8" && "$ARCH" == "x86_64" ||

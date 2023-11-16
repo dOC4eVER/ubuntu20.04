@@ -14,7 +14,7 @@ sudo -u xtreamcodes /home/xtreamcodes/iptv_xtream_codes/php/bin/php /home/xtream
 sudo -u xtreamcodes /home/xtreamcodes/iptv_xtream_codes/php/bin/php /home/xtreamcodes/iptv_xtream_codes/tools/signal_receiver.php >/dev/null 2>/dev/null &
 sudo -u xtreamcodes /home/xtreamcodes/iptv_xtream_codes/php/bin/php /home/xtreamcodes/iptv_xtream_codes/tools/pipe_reader.php >/dev/null 2>/dev/null &
 chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb 2>/dev/null
-wget -qO /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb https://bitbucket.org/emre1393/xtreamui_mirror/downloads/GeoLite2.mmdb 2>/dev/null
+wget -qO /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/GeoLite2.mmdb 2>/dev/null
 chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb 2>/dev/null
 geoliteversion=$(wget -qO- https://github.com/dOC4eVER/ubuntu20.04/releases/download/start/Geolite2_status.json | jq -r ".version")
 PASSMYSQL=$(python2 /home/xtreamcodes/iptv_xtream_codes/pytools/config.py DECRYPT | grep Password | sed "s|Password:            ||g")

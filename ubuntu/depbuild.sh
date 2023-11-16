@@ -64,7 +64,7 @@ echo " "
 	OS="CentOS-Stream"
 	fi
 
-    tput setaf 3 ; tput bold ;echo "Detected : $OS  $VER  $ARCH"; tput sgr0;    
+    echo -e " \033[1;33m Detected\033[1;36m $OS\033[1;32m $VER\033[0m" "\033[1;35m$ARCH\033[0m"
 echo ""	
 if [[ "$OS" = "CentOs" && "$VER" = "7" && "$ARCH" == "x86_64" ||
 "$OS" = "CentOS-Stream" && "$VER" = "8" && "$ARCH" == "x86_64" ||
