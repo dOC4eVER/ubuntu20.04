@@ -1065,6 +1065,6 @@ echo "
  │ LOAD BALANCER ID ->->: $LOADID
  │
  │ CLIENT PORT ACCESS ->: $CLIENTACCESPORT
- │                   ### fixed by dOC4eVER/2023         
+ │                                     ### fixed by dOC4eVER/2023         
  └────────────────────────────────────────────────┘ 
 " >> /root/Xtreaminfo.txt
