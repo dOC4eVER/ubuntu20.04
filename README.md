@@ -3,7 +3,7 @@
 
 
 ### If you install on ubuntu 18.04 there is the old command only on ubuntu 18.04
-    https://github.com/dOC4eVER/ubuntu20.04
+    https://github.com/dOC4eVER/ubuntu18.04
 
 
 
