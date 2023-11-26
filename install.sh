@@ -684,15 +684,15 @@ echo "@reboot root sudo /home/xtreamcodes/iptv_xtream_codes/start_services.sh" >
 /home/xtreamcodes/iptv_xtream_codes/permissions.sh
 killall php-fpm
 rm -f /home/xtreamcodes/iptv_xtream_codes/php/VaiIb8.pid /home/xtreamcodes/iptv_xtream_codes/php/JdlJXm.pid /home/xtreamcodes/iptv_xtream_codes/php/CWcfSP.pid
-rm -f /home/xtreamcodes/iptv_xtream_codes/pytools/balancer.py
-rm -f /home/xtreamcodes/iptv_xtream_codes/crons/balancer.php
+#rm -f /home/xtreamcodes/iptv_xtream_codes/pytools/balancer.py
+#rm -f /home/xtreamcodes/iptv_xtream_codes/crons/balancer.php
 wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/balancer.php -O /home/xtreamcodes/iptv_xtream_codes/crons/balancer.php
 wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/balancer.sh -O /home/xtreamcodes/iptv_xtream_codes/pytools/balancer.sh
 chmod +x /home/xtreamcodes/iptv_xtream_codes/pytools/balancer.sh
 rm -f /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/start_services.sh -O /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 chmod +x /home/xtreamcodes/iptv_xtream_codes/start_services.sh
-#if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then
+if [[ "$OS" = "CentOs" || "$OS" = "Fedora" || "$OS" = "Centos Stream" ]]; then #
 echo " "
     tput setaf 3 ; tput cuf 5; tput bold ;echo "CentOS or Fedora Require nginx rebuild"; tput sgr0;
 echo " "
