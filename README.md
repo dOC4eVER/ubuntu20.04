@@ -2,8 +2,14 @@
 
 
 
+
+
+
 ### If you install on ubuntu 18.04 there is the old command only on ubuntu 18.04
     https://github.com/dOC4eVER/ubuntu18.04
+
+
+
 
 
 
@@ -13,9 +19,17 @@
 
 
 
+
+
+
+
 ### To upgrade an existing Panel only, with a backup of the /admin & /pytools directories in *.old in case you want to go back
  
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/Update_dOC4eVER.sh -O /tmp/Update_dOC4eVER.sh && bash /tmp/Update_dOC4eVER.sh
+
+
+
+
 
 
 
@@ -26,9 +40,17 @@
 
 
 
+
+
+
+
 ### The new load balancer must be installed manually only after adding the load balancer
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/sub_install.sh -O /tmp/sub_install.sh && bash /tmp/sub_install.sh
+
+
+
+
 
 ### if error
 
@@ -39,6 +61,10 @@ full binary rebuild require
     wget https://github.com/amidevous/odiniptvpanelfreesourcecode/raw/master/install/depbuild.sh -O /root/depbuild.sh
     bash /root/depbuild.sh wget https://github.com/amidevous/odiniptvpanelfreesourcecode/raw/master/install/php7.2rebuild.sh -O /root/php7.2rebuild.sh
     bash /root/php7.2rebuild.sh /home/xtreamcodes/iptv_xtream_codes/start_services.sh
+
+
+
+
 
 ### if nginx and nginx_rtmp error minimal rebuild require
 
