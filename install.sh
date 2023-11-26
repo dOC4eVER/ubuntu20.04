@@ -734,7 +734,7 @@ cp nginx_rtmp /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/
 chmod +x /home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/sbin/nginx_rtmp
 cd /root
 rm -rf /tmp/OpenSSL_1_1_1w /tmp/openssl-OpenSSL_1_1_1w nginx-1.24.0 v1.2.2.zip nginx-rtmp-module-1.2.2 ngx_http_geoip2_module nginx-1.24.0.tar.gz
-#fi
+fi
 /home/xtreamcodes/iptv_xtream_codes/start_services.sh
 ##################
     tput setaf 2 ; tput bold ;echo -e "\\r${CHECK_MARK} Configuration Auto Start Done"; tput sgr0;
