@@ -511,7 +511,8 @@ echo ""
 	$PACKAGE_INSTALLER mcrypt-dev
 	$PACKAGE_INSTALLER libmcrypt-devel
 	$PACKAGE_INSTALLER mcrypt-devel
-	$PACKAGE_INSTALLER mcrypt$PACKAGE_INSTALLER libgeoip-dev
+	$PACKAGE_INSTALLER mcrypt
+	$PACKAGE_INSTALLER libgeoip-dev
 	$PACKAGE_INSTALLER libgeoip-devel
 	$PACKAGE_INSTALLER geoip-devel
 elif [[ "$OS" = "Ubuntu" ]]; then
@@ -660,7 +661,7 @@ if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 	apt-get -y install libgeoip-dev
 	apt-get -y install libgeoip-devel
 	apt-get -y install geoip-devel
-	
+	sudo rm -r /home/xtreamcodes/iptv_xtream_codes/phpbuild/
 fi
 	systemctl start mariadb
 	systemctl enable mariadb
