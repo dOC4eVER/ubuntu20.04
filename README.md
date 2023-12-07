@@ -30,8 +30,11 @@ If you want to install load balance on additional servers, add a server to panel
  
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/Update_dOC4eVER.sh -O /tmp/Update_dOC4eVER.sh && bash /tmp/Update_dOC4eVER.sh
 
+### here is some information for people who don't know how to add ports
 
-
+* Enter your desired admin port access (Ex. 9091):
+* Enter your desired client port access (Ex. 8080):
+* Enter your desired apache port access (Ex. 85):
 
 
 
