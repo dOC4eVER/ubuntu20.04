@@ -1,4 +1,8 @@
 # Xtream UI for Ubuntu 18.04 20.04 22.04 Debian 10 11 CentOS 8 Fedora 34 35 36 install
+#
+#
+#
+#
 
 
 
@@ -14,13 +18,36 @@
   
 If you want to install main server with admin panel, choose MAIN.  
 If you want to install load balance on additional servers, add a server to panel in manage servers page, then run script and proceed with LB option.  
+#
+#
+#
+#
 
 
-### New installation the Xtream UI on Ubuntu 18.04/20.04/22.04 Debian 10/11 CentOS 8 Fedora 34/35/36
+
+### New installation the Xtream UI on Ubuntu 20.04/22.04 Debian 10/11 CentOS 8 Fedora 34/35/36
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/install.sh -O /tmp/install.sh && bash /tmp/install.sh
 
+#
+#
+#
+#
 
+
+
+
+
+
+### here is some information for people who don't know how to add ports
+
+* Enter your desired admin port access (Ex. 9091):
+* Enter your desired client port access (Ex. 8080):
+* Enter your desired apache port access (Ex. 85):
+#
+#
+#
+#
 
 
 
@@ -30,11 +57,10 @@ If you want to install load balance on additional servers, add a server to panel
  
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/Update_dOC4eVER.sh -O /tmp/Update_dOC4eVER.sh && bash /tmp/Update_dOC4eVER.sh
 
-### here is some information for people who don't know how to add ports
-
-* Enter your desired admin port access (Ex. 9091):
-* Enter your desired client port access (Ex. 8080):
-* Enter your desired apache port access (Ex. 85):
+#
+#
+#
+#
 
 
 
@@ -43,6 +69,10 @@ If you want to install load balance on additional servers, add a server to panel
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/Downgrade_old_panel.sh -O /tmp/Downgrade_old_panel.sh && bash /tmp/Downgrade_old_panel.sh
     
+#
+#
+#
+#
 
 
 
@@ -54,6 +84,10 @@ If you want to install load balance on additional servers, add a server to panel
 
     wget https://github.com/dOC4eVER/ubuntu20.04/raw/master/sub_install.sh -O /tmp/sub_install.sh && bash /tmp/sub_install.sh
 
+#
+#
+#
+#
 
 
 
